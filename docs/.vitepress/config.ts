@@ -6,8 +6,8 @@ const ogTitle = "SCOTTUI";
 const ogUrl = "https://vitejs.dev";
 const ogDescription = "Next Generation Frontend Tooling";
 export default defineConfigWithTheme({
-  title: "Scott-Doc",
-  description: "组件库",
+  title: "SCOTT DOC",
+  description: "SCOTT的文档站",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "https://ethanwp.oss-cn-shenzhen.aliyuncs.com/blog/logo_docs.svg" }],
     ["meta", { property: "og:type", content: "website" }],
@@ -25,13 +25,13 @@ export default defineConfigWithTheme({
     ["script", { src: "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js" }],
   ],
   themeConfig: {
-    logo: "https://ethanwp.oss-cn-shenzhen.aliyuncs.com/blog/logo_docs.svg",
+    logo: "https://blog.scott-studio.cn/uploads/2023/05/logo_samsara.svg",
     socialLinks: [
       { icon: "github", link: "https://github.com/iscottt" },
     ],
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2023 SCOTT STUDIO'
+      copyright: 'COPYRIGHT © 2022 - 至今 SCOTT-STUDIO.CN'
     },
     nav: [
       { text: "首页", link: "/" },
@@ -39,7 +39,7 @@ export default defineConfigWithTheme({
       {
         text: "nvPress主题",
         items: [
-          { text: "Salary", link: "/themes/Salary/guide",activeMatch: "/themes/Salary" },
+          { text: "💬 Salary", link: "/themes/Salary/guide",activeMatch: "/themes/Salary" },
         ]
       },
     ],

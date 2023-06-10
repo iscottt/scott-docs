@@ -1,7 +1,7 @@
 const sidebar = {
     '/themes/Salary': [
         {
-            text: 'Salary主题',
+            text: 'Salary使用手册',
             items: [
                 {
                     text: '主题介绍',

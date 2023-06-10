@@ -235,7 +235,7 @@
 }
 
 .logo {
-  height: 28px !important;
+  height: 56px !important;
 }
 
 .vp-doc mark {
@@ -573,4 +573,7 @@ p {
 
 .VPFeature :hover a{
   color: var(--primary-color)
+}
+.pager-link .title{
+  margin-top: 10px;
 }

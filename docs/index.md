@@ -2,21 +2,21 @@
 layout: home
 
 title: SCOTT-DOCS
-titleTemplate: 对现有UI组件库的补充
+titleTemplate: SCOTT的文档站
 
 hero:
   name: SCOTT DOC
-  text: 个人文档库
+  tagline: 个人文档库
   image:
-    src: 	https://blog.scott-studio.cn/uploads/2023/05/avatar-1.webp
+    src: https://blog.scott-studio.cn/uploads/2023/05/avatar-1.webp
     alt: Vite
-  # actions:
-  # - theme: brand
-  #   text: 个人博客
-  #   link: https://blog.scott-studio.cn
-  # - theme: alt
-  #   text: GitHub
-  #   link: https://github.com/iscottt
+  actions:
+  - theme: brand
+    text: Salary 主题使用文档
+    link: /themes/Salary/guide
+  - theme: alt
+    text: 本站源码
+    link: https://github.com/iscottt/scott-docs
 
 
 
