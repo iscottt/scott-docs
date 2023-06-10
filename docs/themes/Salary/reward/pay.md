@@ -19,7 +19,7 @@ title: Salary-开通支付接口
 
 **网站接入支付功能流程：** 首先你支付宝要有开通当面付这个功能，然后获取配置相关秘钥，最后拿到网站或则其他需要支付功能的地方使用。
 
-# 第一步：申请当面付接口
+## 第一步：申请当面付接口
 
 1. 支付宝当面付申请地址
 
@@ -53,7 +53,7 @@ title: Salary-开通支付接口
 ![](https://docs.panda-studio.cn:8282/images/20230530110950_20210718221116_303617.png)
 ![](https://docs.panda-studio.cn:8282/images/20230530111011_20220828162403-1024x747.jpg)
 
-# 第二步：应用 ID&支付宝公钥的获取方法
+## 第二步：应用 ID&支付宝公钥的获取方法
 
 1. 进入支付宝开放平台控制台：[https://openhome.alipay.com/platform/keyManage.htm](https://openhome.alipay.com/platform/keyManage.htm)
 2. 商户 APPID：进入之后把 APPID：后面的数字记录下来
@@ -63,7 +63,7 @@ title: Salary-开通支付接口
 ![](https://docs.panda-studio.cn:8282/images/20230530111217_20220822124046-1024x376.jpg)
 ![](https://docs.panda-studio.cn:8282/images/20230530111230_20220822123540.jpg)
 
-# 第三步：获取商户私钥即密钥
+## 第三步：获取商户私钥即密钥
 
 1. 打开支付宝开放平台开发文档地址：https://opendocs.alipay.com/common/02kipk
 
@@ -92,7 +92,7 @@ title: Salary-开通支付接口
 
 ![](https://docs.panda-studio.cn:8282/images/20230530111539_20220822123655.jpg)
 
-# 完成
+## 完成
 
 至此，你的当面付接口就全部弄好了，填入对应的网站对接后台即可
 

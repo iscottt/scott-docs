@@ -23,11 +23,11 @@ title: Salary-主题介绍
 
 ![anchor text](../../assets/imgs/checkin.png)
 
-# 主题效果
+## 主题效果
 
 主题效果请访问开发者本人的博客站点：[SCOTT STUDIO](https://blog.scott-studio.cn)
 
-# 获取主题
+## 获取主题
 
 ::: warning 打赏送主题
 向开发者（QQ：2406177615）打赏指定金额，作为打赏回礼，将赠送此主题给您使用

@@ -35,6 +35,7 @@ export default defineConfigWithTheme({
     },
     nav: [
       { text: "首页", link: "/" },
+      { text: "博客", link: "https://blog.scott-studio.cn" },
       {
         text: "nvPress主题",
         items: [
@@ -45,7 +46,7 @@ export default defineConfigWithTheme({
     sidebar,
     aside: true,
     // outline设置为deep可以解析2-6层深度的标题嵌套
-    outline: "deep",
+    outline: 'deep',
     // 设置所有aside的标题
     outlineTitle: "文章Wiki",
     docFooter: {

@@ -6,6 +6,7 @@
   --vt-c-green: #42b883;
   --vt-c-green-light: #42d392;
   --vt-c-green-lighter: #35eb9a;
+  --card-padding: 8px;
   --vt-c-green-dark: #33a06f;
   --vt-c-green-darker: #155f3e;
   --vt-c-blue: #3b8eed;
@@ -248,7 +249,7 @@
   padding: 0 0.5em;
 }
 
-.vp-doc h1 {
+.vp-doc h2 {
 
   margin: 1em 0;
   font-size: 1.5em;
@@ -258,7 +259,7 @@
   padding-bottom: 0.4em;
 }
 
-.vp-doc h1:after {
+.vp-doc h2:after {
   content: "";
   position: absolute;
   display: block;
@@ -272,11 +273,11 @@
   transition: .25s;
 }
 
-.vp-doc h1:hover:after {
+.vp-doc h2:hover:after {
   width: 2em;
 }
 
-.vp-doc h2 {
+.vp-doc h3 {
   margin: 0.8em 0;
   font-size: 1.25em;
   font-weight: 400;
@@ -287,7 +288,7 @@
   text-shadow: 0 1px #fff;
 }
 
-.dark .vp-doc h2 {
+.dark .vp-doc h3 {
 
   border-left: 2px solid var(--primary-color-suppl);
   background: var(--primary-opacity-2);
@@ -456,7 +457,8 @@ p {
 }
 
 .dark .warning {
-  background-color: #e6a23c33 !important;;
+  background-color: #e6a23c33 !important;
+  ;
 }
 
 .dark .warning .custom-block-title {
@@ -496,10 +498,12 @@ p {
   box-shadow: 0 2px 2px var(--primary-opacity-3);
   background: #1E1E20;
 }
-.pager-link .title{
+
+.pager-link .title {
   font-size: 16px;
 }
-.pager-link:hover .title{
+
+.pager-link:hover .title {
   color: var(--primary-color);
 }
 
@@ -530,23 +534,43 @@ p {
 .vp-doc img:hover {
   box-shadow: 0 0 0 1px var(--primary-opacity-5), 0 0 0 4px var(--primary-opacity-1) !important;
 }
-.VPFooter .message, .VPFooter .copyright{
+
+.VPFooter .message,
+.VPFooter .copyright {
   text-align: right;
 }
 
 
 /* menu */
-.VPMenu{
+.VPMenu {
   border-radius: 6px !important;
   padding: 6px 8px !important
 }
-.menu{
+
+.menu {
   top: calc(var(--vp-nav-height) / 2 + 35px) !important;
 }
-.VPButton.brand{
+
+.VPButton.brand {
   border-color: var(--primary-color) !important;
 }
 
-.VPButton.brand:hover{
+.VPButton.brand:hover {
   border-color: var(--vp-button-brand-border) !important;
+}
+
+.VPFeature .icon{
+  background-color: var(--primary-color) !important;
+}
+
+.VPFeature i{
+  color: #fff;
+}
+
+.VPFeature a{
+  transition: .35s;
+}
+
+.VPFeature :hover a{
+  color: var(--primary-color)
 }
