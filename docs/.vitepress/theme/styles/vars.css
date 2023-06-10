@@ -234,7 +234,7 @@
 }
 
 .logo {
-  height: 52px !important;
+  height: 28px !important;
 }
 
 .vp-doc mark {
@@ -486,7 +486,7 @@ p {
 .pager-link:hover,
 .VPFeature:hover {
   border-color: var(--primary-color-suppl);
-  box-shadow: 0 5px 8px var(--primary-opacity-3);
+  box-shadow: 0 2px 4px var(--primary-opacity-3);
   background: var(--base-color);
 }
 
@@ -521,10 +521,11 @@ p {
   cursor: pointer;
   border-radius: 0.3em;
   vertical-align: middle;
-  margin: auto;
   box-shadow: 0 0 0 1px #0000000d;
   transition: .25s;
+  margin-bottom: 20px;
 }
+
 
 .vp-doc img:hover {
   box-shadow: 0 0 0 1px var(--primary-opacity-5), 0 0 0 4px var(--primary-opacity-1) !important;
@@ -541,4 +542,11 @@ p {
 }
 .menu{
   top: calc(var(--vp-nav-height) / 2 + 35px) !important;
+}
+.VPButton.brand{
+  border-color: var(--primary-color) !important;
+}
+
+.VPButton.brand:hover{
+  border-color: var(--vp-button-brand-border) !important;
 }

@@ -6,10 +6,10 @@ const ogTitle = "SCOTTUI";
 const ogUrl = "https://vitejs.dev";
 const ogDescription = "Next Generation Frontend Tooling";
 export default defineConfigWithTheme({
-  title: "SCOTT-DOCS",
+  title: "Scott-Doc",
   description: "组件库",
   head: [
-    ["link", { rel: "icon", type: "image/svg+xml", href: "https://blog.scott-studio.cn/uploads/2023/05/logo_favicon_300.png" }],
+    ["link", { rel: "icon", type: "image/svg+xml", href: "https://ethanwp.oss-cn-shenzhen.aliyuncs.com/blog/logo_docs.svg" }],
     ["meta", { property: "og:type", content: "website" }],
     ["meta", { property: "og:title", content: ogTitle }],
     ["meta", { property: "og:image", content: ogImage }],
@@ -25,7 +25,7 @@ export default defineConfigWithTheme({
     ["script", { src: "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js" }],
   ],
   themeConfig: {
-    logo: "https://blog.scott-studio.cn/uploads/2023/05/logo_samsara.svg",
+    logo: "https://ethanwp.oss-cn-shenzhen.aliyuncs.com/blog/logo_docs.svg",
     socialLinks: [
       { icon: "github", link: "https://github.com/iscottt" },
     ],

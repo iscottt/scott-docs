@@ -5,18 +5,18 @@ title: SCOTT-DOCS
 titleTemplate: 对现有UI组件库的补充
 
 hero:
-  name: SCOTT-DOCS
+  name: SCOTT DOC
   text: 个人文档库
   image:
     src: 	https://blog.scott-studio.cn/uploads/2023/05/avatar-1.webp
     alt: Vite
-  actions:
-  - theme: brand
-    text: 开始探索
-    link: /guide/
-  - theme: alt
-    text: GitHub
-    link: https://github.com/iscottt
+  # actions:
+  # - theme: brand
+  #   text: 个人博客
+  #   link: https://blog.scott-studio.cn
+  # - theme: alt
+  #   text: GitHub
+  #   link: https://github.com/iscottt
 
 
 
