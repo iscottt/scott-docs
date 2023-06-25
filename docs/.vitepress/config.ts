@@ -37,11 +37,17 @@ export default defineConfigWithTheme({
       { text: "首页", link: "/" },
       { text: "博客", link: "https://blog.scott-studio.cn" },
       {
-        text: "nvPress主题",
+        text: "🎉 nvPress主题",
         items: [
           { text: "💬 Salary", link: "/themes/Salary/guide",activeMatch: "/themes/Salary" },
         ]
       },
+      {
+        text:"📚 学习笔记",
+        items:[
+          { text: "🎃 CSS ", link: "/study/css/background",activeMatch: "/study/css" },
+        ]
+      }
     ],
     sidebar,
     aside: true,
