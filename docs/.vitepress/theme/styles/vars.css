@@ -577,3 +577,6 @@ p {
 .pager-link .title{
   margin-top: 10px;
 }
+html, body { 
+	scroll-behavior:smooth; 
+}
