@@ -47,6 +47,17 @@ const sidebar = {
                 },
             ]
         }
+    ],
+    '/study/css': [
+        {
+            text: '🗳️ CSS',
+            items: [
+                {
+                    text: 'background 的 8 种核心技巧',
+                    link: '/study/CSS/background'
+                },
+            ]
+        }
     ]
 }
 
