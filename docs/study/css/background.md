@@ -279,3 +279,84 @@ body{
 gif示意图
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f64d38380f6944e18a76fa93d267b2c6~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+利用这个技巧，我们还可以实现波浪下划线：
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32b1972c8b8a4115b56c2dc13628180b~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+相较于使用`text-decoration`实现的下划线而言，使用渐变实现的优势是它的下划线可以再添加上动画，像是这样：
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d8f4a914c1864d9db2fb3406d0b2e602~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+这里利用的是`background-position`的变化，实现的 hover 效果。代码如下：
+```less
+
+.flow-wave{
+  display: block;
+  background-image: 
+    radial-gradient(circle at 10px -7px, transparent 8px, red 8px, red 9px, transparent 9px),
+    radial-gradient(circle at 10px 27px, transparent 8px, red 8px, red 9px, transparent 9px);
+  background-size: 20px 20px;
+  background-position: -10px calc(100% + 18px), 0 calc(100% - 2px);
+  background-repeat: repeat-x;
+  padding: 20px;
+  &:hover{
+    animation: wave 1s infinite linear;
+  }
+}
+
+@keyframes wave{
+  from {
+    background-position-x: -10px , 0;
+  }
+  to {
+    background-position-x: -30px , -20px;
+  }
+}
+```
+
+**完整代码戳这里：[https://code.juejin.cn/pen/7248979743234588684](https://code.juejin.cn/pen/7248979743234588684)**
+
+总结一下，这里我们又得到了两个技巧：
+
+1. 预留衔接空间消除渐变产生的锯齿；
+2. 利用多层渐变的组合，重叠在一起拼出想要的图形。
+
+## `conic-gradient` 角向渐变（圆锥渐变）
+
+接下来，我们再聊聊比较晚进入大家视野的 conci-gradient 角向渐变，在更早之前，它也被翻译成圆锥渐变。
+看看它最简单的 API：
+```css
+{
+    background: conic-gradient(deeppink, yellowgreen);
+}
+```
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/feb923df74134bc1ad33e3513c0a0881~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+那么它和另外两个渐变的区别在哪里呢？
+
+ - `linear-gradient`线性渐变的方向是一条直线，可以是任何角度。
+ - `radial-gradient`径向渐变是从圆心点以椭圆形状向外扩散。
+
+而角向渐变从`渐变的圆心`、`渐变起始角度`以及`渐变方向上`来说，是这样的：
+
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9af0b09aabe1476aa37b14d11dc16f36~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+这里要划重点啦！从图中可以看到，角向渐变的起始圆心点、起始角度和渐变方向为：
+
+- 起始点是图形中心；
+- 默认渐变角度 0deg 是从上方垂直于圆心的；
+- 渐变方向以顺时针方向绕中心实现。
+
+当然，我们也可以控制角向渐变的`起始角度`以及`角向渐变的圆心`。稍微改一下上述代码：
+
+```css
+{
+  background: conic-gradient(from 270deg at 50px 50px, deeppink, yellowgreen);
+}
+```
+效果如下：
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b58dd65a19624a11b2c8e29d0f67b97c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+我们改变了`起始角度`以及`角向渐变的圆心`：通过 `from 270deg at 50px 50px`，我们设定了角向渐变的圆心为图案的`50px 50px`处，设定了初始角度为`270deg`。
+
+当然，上述的 6 个技巧对于角向渐变而言，也是一样适用的。在继续讨论渐变的技巧之前，由于大部分同学对角向渐变还比较陌生，因此这里我们再好好学习学习角向渐变的一些特性。
+
+### 使用`conic-gradient`实现颜色表盘
