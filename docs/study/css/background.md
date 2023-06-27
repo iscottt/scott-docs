@@ -6,7 +6,7 @@ layout: doc
 title: CSS学习笔记-Background
 ---
 <div class="title-wrapper">
-   <div class="page-title">background 的 8 种核心技巧</div>
+   <div class="page-title">background 的核心技巧</div>
    <div class="post-title">—— CSS学习笔记
       <span class="lastModifyTime">
           <i class="fa-regular fa-clock"></i> 最后更新： 1 天前
@@ -360,3 +360,213 @@ gif示意图
 当然，上述的 6 个技巧对于角向渐变而言，也是一样适用的。在继续讨论渐变的技巧之前，由于大部分同学对角向渐变还比较陌生，因此这里我们再好好学习学习角向渐变的一些特性。
 
 ### 使用`conic-gradient`实现颜色表盘
+
+从上面了解了`conic-gradient`最简单的用法，我们使用它实现一个最简单的颜色表盘。
+
+`conic-gradient`不仅仅只是从一种颜色渐变到另一种颜色，与另外两个渐变一样，可以实现多颜色的过渡渐变。
+
+由此，想到了彩虹，我们可以依次列出`赤橙黄绿青蓝紫`七种颜色：`conic-gradient: (red, orange, yellow, green, teal, blue, purple)`。
+
+上面表示，在角向渐变的过程中，颜色从设定的第一个`red`开始，渐变到`orange`，再到`yellow`，一直到最后设定的`purple`。并且每一个区间是等分的。
+
+我们再给加上`border-radius:50%`，假设我们的 CSS 如下：
+
+```css
+{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(red, orange, yellow, green, teal, blue, purple);
+}
+```
+
+看看效果：
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9ea913134d0847a08d0723314156173a~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+Wow，已经有了初步形状了。但是，总感觉哪里不大自然。
+
+问题出在哪里呢？一是颜色不够丰富不够明亮，二是起始处与结尾处衔接不够自然。再稍微调整一下。
+
+我们知道，表示颜色的方法，除了`rgb()`颜色表示法之外，还有`hsl()`表示法。
+
+::: tip 提示
+hsl() 被定义为色相-饱和度-明度（Hue-Saturation-Lightness）。
+:::
+
+ - 色相（H）是色彩的基本属性，就是平常所说的颜色名称，如红色、黄色等。
+ - 饱和度（S）是指色彩的纯度，越高色彩越纯，低则逐渐变灰，取 0~100% 的数值。
+ - 明度（V），亮度（L），取 0～100%。
+
+这里，我们通过改变色相得到一个较为明亮完整的颜色色系。
+
+也就是采用这样一个过渡 `hsl(0%, 100%, 50%)` --> `hsl(100%, 100%, 50%)`，中间只改变色相，生成 20 个过渡状态。借助 SCSS ，CSS 语法如下：
+
+```scss
+$colors: ();
+$totalStops:20;
+
+@for $i from 0 through $totalStops{
+    $colors: append($colors, hsl($i *(360deg/$totalStops), 100%, 50%), comma);
+}
+
+.colors {
+    width: 200px;
+    height: 200px;
+    background: conic-gradient($colors);
+    border-radius: 50%;
+}
+```
+得到如下效果图，这次的效果很好：
+
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21ed1427c8e54322916fb8889542f057~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+
+### 角向渐变配合百分比使用
+
+当然，我们可以更加具体地指定角向渐变每一段的比例，**配合百分比**，可以很轻松地实现饼图。
+
+假设我们有如下 CSS：
+
+```css
+{
+    width: 200px;
+    height: 200px;
+    background: conic-gradient(deeppink 0, deeppink 30%, yellowgreen 30%, yellowgreen 70%, teal 70%, teal 100%);
+    border-radius: 50%;
+}
+```
+
+上图，我们分别指定了 0~30%、30%~70%、70%~100% 三个区间的颜色分别为 `deeppink（深红）`、`yellowgreen（黄绿`） 以及 `teal（青）` ，可以得到如下饼图：
+
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f4ab0b7cdb09437cbfabd1296416ccd7~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+当然，上面只是百分比的第一种写法，还有另一种写法也能实现：
+
+```css
+{
+    background: conic-gradient(deeppink 0 30%, yellowgreen 0 70%, teal 0 100%);
+}
+```
+这里表示：
+
+1. 0～30% 的区间使用 `deeppink`；
+2. 30%～70% 的区间使用 `yellowgreen`；
+3. 70%～100% 的区间使用 `teal`。
+
+而且，先定义的颜色的层叠在后定义的颜色之上。
+
+### 角向渐变配合`background-size`使用
+
+使用了百分比控制了区间，再配合使用`background-size`就可以实现各种贴图啦。
+
+我们首先实现一个基础角向渐变图形，如下：
+
+```css
+{
+    width: 250px;
+    height: 250px;
+    margin: 50px auto;
+    background: conic-gradient(#000 12.5%, #fff 0 37.5%, #000 0 62.5%, #fff 0 87.5%, #000 0);
+}
+```
+效果图：
+
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd3d3167310e40929c025e6b4a91999f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+再加上 `background-size: 50px 50px;`也就是：
+```css
+{
+    width: 250px;
+    height: 250px;
+    margin: 50px auto;
+    background: conic-gradient(#000 12.5%, #fff 0 37.5%, #000 0 62.5%, #fff 0 87.5%, #000 0);
+    background-size: 50px 50px;
+}
+```
+得到：
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1017366f1ab84792afad7f45685915d0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+### 重复角向渐变`repeating-conic-gradient`
+
+与线性渐变及径向渐变一样，角向渐变也是存在重复角向渐变`repaet-conic-gradient`的。
+
+我们假设希望不断重复的片段是 0~30° 的一个片段，它的 CSS 代码是`conic-gradient(deeppink 0 15deg, yellowgreen 0 30deg)`。
+
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1d4f62b439754eba879d4cd070fea1cf~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+那么，使用了`repeating-conic-gradient`之后，会自动填充满整个区域，CSS 代码如下：
+
+```css
+{
+    width: 200px;
+    height: 200px;
+    background: repeating-conic-gradient(deeppink 0 15deg, yellowgreen 0 30deg);
+    border: 1px solid #000;
+}
+```
+
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f663c47cd4424592a6347bd97adbac8d~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+### 技巧七：利用角向渐变 repeat 配合 position 完成特殊图案
+
+好，我们回归渐变的技巧。上面我们有利用角向渐变，实现这样一个图形：
+
+```css
+{
+    background: conic-gradient(from 270deg at 50px 50px, deeppink, yellowgreen);
+}
+```
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/358c0dcd17334ec3a72cb3c52e8db377~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+简单改造一下
+```css
+div {
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    background: conic-gradient(from 270deg at 50px 50px, deeppink 0%, deeppink 90deg, transparent 90deg, transparent 
+ 360deg);
+    border: 1px solid #000;
+}
+```
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dfa8896013ad44c78e3e8a1f0e4a853e~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+起始角度以及角向渐变的圆心没有改变，但是只让前`90deg`的图形为粉色，而后`270deg`的图形，设置为了透明色。
+
+我们利用角向渐变，在图像内部，又实现了一个小的矩形！
+
+接下来，我们再给上述图形，增加一个`background-position: -25px, -25px;`
+
+```css
+div {
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    background: conic-gradient(from 270deg at 50px 50px, deeppink 0%, deeppink 90deg, transparent 90deg, transparent 
+ 360deg);
+    background-position: -25px -25px;
+    border: 1px solid #000;
+}
+```
+这样，我们就神奇地得到了这样一个图形：
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c16161ea98a74076919289cb51c09d26~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+为什么会有这样一种现象？如果我们在代码中加入`background-repeat: no-repeat;`，那么就会只剩下左上角的一个小正方形
+
+因此，这里实际上利用了渐变图形默认会 repeat 的特性，去掉 background-repeat: no-repeat 实际上是这么个意思：
+
+![](https://ethanwp.oss-cn-shenzhen.aliyuncs.com/ethanwp/conic_repeat.webp)
+
+理解了这张图，也就理解了这个技巧的核心所在！
+
+利用渐变图案默认 repeat 的特性，配合`background-position`对图形进行一个位移，使其可以在图形的其他侧边出现，以完成特殊图案！
+
+## 总结
+
+1. 渐变的颜色可以是透明色。
+2. 渐变可以是从一种颜色直接到另外一种颜色，不需要有过渡状态。
+3. 渐变是可以叠加多层的。
+4. 利用 repeating-linear-gradient 节省代码，实现片段的重复。
+5. 预留衔接空间消除渐变产生的锯齿。
+6. 利用多层渐变的组合，重叠在一起拼出想要的图形。
+7. 利用角向渐变 Repeat 配合 position 完成特殊图案。
+8. 利用小单位实现造型迥异的图案。

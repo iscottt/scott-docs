@@ -34,8 +34,8 @@ export default defineConfigWithTheme({
       copyright: 'COPYRIGHT © 2022 - 至今 SCOTT-STUDIO.CN'
     },
     nav: [
-      { text: "首页", link: "/" },
-      { text: "博客", link: "https://blog.scott-studio.cn" },
+      { text: "🏠 首页", link: "/" },
+      { text: "🎨 博客", link: "https://blog.scott-studio.cn" },
       {
         text: "🎉 nvPress主题",
         items: [

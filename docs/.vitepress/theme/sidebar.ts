@@ -53,8 +53,12 @@ const sidebar = {
             text: '🗳️ CSS',
             items: [
                 {
-                    text: 'background 的 8 种核心技巧',
+                    text: 'background的核心技巧',
                     link: '/study/CSS/background'
+                },
+                {
+                    text: 'background属性进阶',
+                    link: '/study/CSS/background-advanced'
                 },
             ]
         }
