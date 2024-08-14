@@ -16,7 +16,6 @@
   --vt-c-blue-darker: #255489;
   --vp-c-brand: var(--primary-color);
   --vp-c-brand-dimm: rgba(100, 108, 255, 0.08);
-  --vp-c-bg-alt: #fff;
   --name: common;
   --font-family: v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-mono: v-mono, SFMono-Regular, Menlo, Consolas, Courier, monospace;
@@ -136,22 +135,6 @@
 }
 
 /**
- * Component: Button
- * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-button-brand-border: var(--vp-c-brand-light);
-  --vp-button-brand-text: var(--vp-c-text-dark-1);
-  --vp-button-brand-bg: var(--vp-c-brand);
-  --vp-button-brand-hover-border: var(--vp-c-brand-light);
-  --vp-button-brand-hover-text: var(--vp-c-text-dark-1);
-  --vp-button-brand-hover-bg: var(--vp-c-brand-light);
-  --vp-button-brand-active-border: var(--vp-c-brand-light);
-  --vp-button-brand-active-text: var(--vp-c-text-dark-1);
-  --vp-button-brand-active-bg: var(--vp-button-brand-bg);
-}
-
-/**
  * Component: Home
  * -------------------------------------------------------------------------- */
 
@@ -212,7 +195,7 @@
   Also specify some classes twice to have higher specificity
   over scoped class data attribute.
 */
-.dark .vp-doc a,
+/* .dark .vp-doc a,
 .dark .vp-doc a>code,
 .dark .VPNavBarMenuLink.VPNavBarMenuLink:hover,
 .dark .VPNavBarMenuLink.VPNavBarMenuLink.active,
@@ -227,7 +210,7 @@
 .dark .vp-doc a>code:hover {
   color: var(--vp-c-brand-lightest);
   opacity: 1;
-}
+} */
 
 /* Transition by color instead of opacity */
 .dark .vp-doc .custom-block a {
@@ -235,7 +218,7 @@
 }
 
 .logo {
-  height: 56px !important;
+  height: 36px !important;
 }
 
 .vp-doc mark {
@@ -306,50 +289,6 @@
   border-top: none;
 }
 
-.vp-doc .header-anchor {
-  display: none;
-}
-
-.VPNavBar {
-  border-bottom: 1px solid rgb(224, 224, 230) !important;
-}
-
-.dark .VPNavBar {
-  border-color: rgba(255, 255, 255, 0.24) !important;
-}
-
-.dark .VPNavBar.has-sidebar .content-body {
-  background: #18181C;
-}
-
-.curtain {
-  display: none !important;
-}
-
-.VPSidebar {
-  box-shadow: 3px 0 8px #1f2d3d0a !important;
-  border-right: 1px solid rgb(224, 224, 230) !important;
-}
-
-.dark .VPSidebar {
-
-  box-shadow: 3px 0 8px #1f2d3d0a !important;
-
-  border-color: #ffffff1a !important;
-
-}
-
-.VPNavBarTitle.has-sidebar .title {
-  border: none;
-}
-
-.VPNav {
-  background: #fff;
-}
-
-.dark .VPNav {
-  background: rgb(24, 24, 28) !important;
-}
 
 
 
@@ -480,12 +419,9 @@ p {
   background-color: #f56c6c33 !important;
 }
 
-.VPNavBarMenuLink.active {
-  border-bottom: 1px solid var(--primary-color);
-}
 
 
-.pager-link:hover,
+/* .pager-link:hover,
 .VPFeature:hover {
   border-color: var(--primary-color-suppl);
   box-shadow: 0 2px 4px var(--primary-opacity-3);
@@ -497,7 +433,7 @@ p {
   border-color: var(--primary-color-suppl);
   box-shadow: 0 2px 2px var(--primary-opacity-3);
   background: #1E1E20;
-}
+} */
 
 .pager-link .title {
   font-size: 16px;
@@ -551,17 +487,9 @@ p {
   top: calc(var(--vp-nav-height) / 2 + 35px) !important;
 }
 
-.VPButton.brand {
-  border-color: var(--primary-color) !important;
-}
-
-.VPButton.brand:hover {
-  border-color: var(--vp-button-brand-border) !important;
-}
-
-.VPFeature .icon{
-  background-color: var(--primary-color) !important;
-}
+/* .VPFeature .icon{
+  background-color: transparent !important;
+} */
 
 .VPFeature i{
   color: #fff;

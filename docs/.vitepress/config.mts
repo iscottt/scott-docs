@@ -1,15 +1,15 @@
 import { defineConfigWithTheme } from "vitepress";
 import mdItCustomAttrs from 'markdown-it-custom-attrs'
 import sidebar from "./theme/sidebar";
-const ogImage = "https://vitejs.dev/og-image.png";
+const ogImage = "https://blog.scott-studio.cn/uploads/2024/08/doc-logo.webp";
 const ogTitle = "SCOTTUI";
 const ogUrl = "https://vitejs.dev";
 const ogDescription = "Next Generation Frontend Tooling";
 export default defineConfigWithTheme({
-  title: "SCOTT DOC",
+  title: "SCOTT Studio 教程&文档",
   description: "SCOTT的文档站",
   head: [
-    ["link", { rel: "icon", type: "image/svg+xml", href: "https://ethanwp.oss-cn-shenzhen.aliyuncs.com/blog/logo_docs.svg" }],
+    ["link", { rel: "icon", type: "image/svg+xml", href: "https://blog.scott-studio.cn/uploads/2024/08/doc-logo.webp" }],
     ["meta", { property: "og:type", content: "website" }],
     ["meta", { property: "og:title", content: ogTitle }],
     ["meta", { property: "og:image", content: ogImage }],
@@ -25,27 +25,32 @@ export default defineConfigWithTheme({
     ["script", { src: "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js" }],
   ],
   themeConfig: {
-    logo: "https://blog.scott-studio.cn/uploads/2023/05/logo_samsara.svg",
+    // logo: "./assets/imgs/channel-logo.png",
     socialLinks: [
-      { icon: "github", link: "https://github.com/iscottt" },
+      { icon: "github", link: "https://github.com/iscottt/scott-docs" },
     ],
     footer: {
       message: 'Released under the MIT License.',
       copyright: 'COPYRIGHT © 2022 - 至今 SCOTT-STUDIO.CN'
     },
+
+    search: {
+      provider: 'local'
+    },
     nav: [
-      { text: "🏠 首页", link: "/" },
-      { text: "🎨 博客", link: "https://blog.scott-studio.cn" },
+      { text: "首页", link: "/" },
+      { text: "博客", link: "https://blog.scott-studio.cn" },
       {
-        text: "🎉 nvPress主题",
+        text: "nvPress主题",
         items: [
-          { text: "💬 Salary", link: "/themes/Salary/guide",activeMatch: "/themes/Salary" },
+          { text: "Salary", link: "/themes/Salary/guide",activeMatch: "/themes/Salary" },
         ]
       },
       {
-        text:"📚 学习笔记",
+        text:"掘金小册",
         items:[
-          { text: "🎃 CSS ", link: "/study/css/background",activeMatch: "/study/css" },
+          { text: "CSS技术揭秘与实战通关", link: "/study/css/background",activeMatch: "/study/css" },
+          { text: "Nuxt3.0全栈开发", link: "/study/Nuxt3.0/lesson-1",activeMatch: "/study/Nuxt3.0" },
         ]
       }
     ],
