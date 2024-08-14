@@ -25,54 +25,54 @@ Prisma 通过以下流程简化我们的开发工作:
 数据库交互。同时我们准备创建两个模型 Post 和
 User，它们代表了未来要创建的数据库表结构。server/database/schema.prisma：
 
-    
-    
-            datasource db {
-              provider = "mysql"
-              url      = env("DATABASE_URL")
-            }
-    
-            generator client {
-              provider = "prisma-client-js"
-            }
-    
-            model Post {
-              id        Int     @id @default(autoincrement())
-              title     String
-              content   String?
-              published Boolean @default(false)
-              author    User?   @relation(fields: [authorId], references: [id])
-              authorId  Int?
-            }
-    
-            model User {
-              id    Int     @id @default(autoincrement())
-              email String  @unique
-              name  String?
-              posts Post[]
-            }
-    
+```prisma
+  datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+  }
+
+  generator client {
+    provider = "prisma-client-js"
+  }
+
+  model Post {
+    id        Int     @id @default(autoincrement())
+    title     String
+    content   String?
+    published Boolean @default(false)
+    author    User?   @relation(fields: [authorId], references: [id])
+    authorId  Int?
+  }
+
+  model User {
+    id    Int     @id @default(autoincrement())
+    email String  @unique
+    name  String?
+    posts Post[]
+  }
+```
 
 添加环境变量 DATABASE_URL，.env
 
     
-    
+
+```yml
     DATABASE_URL="mysql://root:rootpassword@localhost:3306/test"
-    
+```
 
 然后通过定义生成数据库表结构，我们需要执行 `prisma migrate` CLI 命令，这个命令同时会生成 prisma client：
 
-    
-    
+
+```bash
     npx prisma migrate dev --name init --schema server/database/schema.prisma 
-    
+```
 
 ![image.png](img\23\2.image) ![image.png](img\23\3.image)
 
 最后在代码中通过 client 访问数据库：
 
-    
-    
+
+```typescript
     import { PrismaClient } from '@prisma/client'
     
     const prisma = new PrismaClient()
@@ -93,19 +93,17 @@ User，它们代表了未来要创建的数据库表结构。server/database/sch
         await prisma.$disconnect()
         process.exit(1)
       })
-    
+```
 
 执行这段代码：
 
-    
-    
+```bash
     npx ts-node server/database/test.ts
-    
+```
 
 注意需要配置一下 ts-node 模块选项，tsconfig.json：
 
-    
-    
+```json
     {
       // https://nuxt.com/docs/guide/concepts/typescript
       "extends": "./.nuxt/tsconfig.json",
@@ -115,7 +113,7 @@ User，它们代表了未来要创建的数据库表结构。server/database/sch
         }
       }
     }
-    
+```
 
 执行结果如下，此时并没有数据，所以返回空数组。
 
@@ -123,8 +121,7 @@ User，它们代表了未来要创建的数据库表结构。server/database/sch
 
 我们插入一些数据进去：
 
-    
-    
+```typescript
       await prisma.user.create({
         data: {
           name: '村长',
@@ -136,19 +133,18 @@ User，它们代表了未来要创建的数据库表结构。server/database/sch
           },
         },
       })
-    
+```
 
 查询时添加 include 选项：
 
-    
-    
+```typescript
       const allUsers = await prisma.user.findMany({
         include: {
           posts: true,
         },
       })
       console.dir(allUsers, { depth: null })
-    
+```
 
 查询结果如下：
 
@@ -156,15 +152,14 @@ User，它们代表了未来要创建的数据库表结构。server/database/sch
 
 最后更新数据可以使用 `update({...})`：
 
-    
-    
+```typescript
       const post = await prisma.post.update({
         where: { id: 1 },
         data: { published: true },
       })
     
       console.log(post)
-    
+```
 
 ![image.png](img\23\6.image)
 
@@ -179,13 +174,12 @@ application，建议我们使用一个单例的 PrismaClient。
 
 server/database/client.ts
 
-    
-    
+```typescript
     import { PrismaClient } from '@prisma/client'
     
     const prisma = new PrismaClient()
     export default prisma
-    
+```
 
 ### 业务代码拆分
 
@@ -203,8 +197,7 @@ controller 层，业务代码放在 service 层，最后在接口中组合。
 
 首先创建 userRepository.ts，编写 createUser 和 getUserByEmail 两个方法：
 
-    
-    
+```typescript
     import type { User } from '@prisma/client'
     import prisma from '~/server/database/client'
     import type { IUser } from '~/types/IUser'
@@ -227,23 +220,21 @@ controller 层，业务代码放在 service 层，最后在接口中组合。
     
       return user
     }
-    
+```
 
 这里需要创建一个 User 类型，创建 ~/types/IUser.ts:
 
-    
-    
+```typescript
     export interface IUser {
       id?: number
       email: string
       name?: string
     }
-    
+```
 
 下面编写登录接口，~/server/api/login.ts：
 
-    
-    
+```typescript
     import { getUserByEmail } from '../database/repositories/userRepository'
     
     export default defineEventHandler(async (e) => {
@@ -269,12 +260,11 @@ controller 层，业务代码放在 service 层，最后在接口中组合。
         return sendError(e, createError('Failed to retrieve data!'))
       }
     })
-    
+```
 
 编写一个登录页面测试一下，~/pages/login.vue：
 
-    
-    
+```vue
     <script setup lang="ts">
     const email = useState(() => '')
     const onLogin = () => {
@@ -299,7 +289,7 @@ controller 层，业务代码放在 service 层，最后在接口中组合。
         </NButton>
       </div>
     </template>
-    
+```
 
 测试结果非常理想！
 

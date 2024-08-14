@@ -16,13 +16,13 @@ Nuxt3 会自动读取 plugins 目录下的文件注册为插件，并在创建 V
 使用 `defineNuxtPlugin()` 声明一个插件，像下面这样：
 
     
-    
+```typescript
     // 唯一的参数是 NuxtApp 实例
     export default defineNuxtPlugin(nuxtApp => {
       // Doing something with nuxtApp
       console.log(nuxtApp)
     })
-    
+```
 
 ### 注册插件
 
@@ -35,11 +35,11 @@ Nuxt3 会自动读取 plugins 目录下的文件注册为插件，并在创建 V
 
     * ![](img\16\2.image)
   * 可在文件名上使用 `.server` 或 `.client` 后缀使插件仅作用于服务端或者客户端。
-
-    *         plugins/
-        | - server-plugin.server.ts
-        | - client-plugin.client.ts
-        
+```bash
+    plugins/
+    | - server-plugin.server.ts
+    | - client-plugin.client.ts
+```
 
 ## Nuxt 上下文：NuxtApp
 
@@ -49,15 +49,10 @@ Nuxt3 会自动读取 plugins 目录下的文件注册为插件，并在创建 V
 我们需要了解 nuxtApp 一些重要的方法和属性以便使用：
 
   * `provide (name, value)`：定义全局变量和方法；
-
   * `hook(name, cb)`：定义 nuxt 钩子函数；
-
   * `vueApp`：获取 vue 实例；
-
   * `ssrContext`：服务端渲染时的上下文；
-
   * `payload`：从服务端到客户端传递的数据和状态；
-
   * `isHydrating`：用于检测是否正在客户端注水过程中。
 
 ## 常见插件用例
@@ -66,8 +61,7 @@ Nuxt3 会自动读取 plugins 目录下的文件注册为插件，并在创建 V
 
 一个比较常见的插件用例是使用 Nuxt 生命周期钩子实现一些扩展功能，比如在前面的“错误处理”章节中，我们就曾利用插件编写生命周期处理错误的功能：
 
-    
-    
+```typescript
     export default defineNuxtPlugin((nuxtApp) => {
       nuxtApp.hook('app:error', (..._args) => {
         console.log('app:error')
@@ -76,7 +70,7 @@ Nuxt3 会自动读取 plugins 目录下的文件注册为插件，并在创建 V
         console.log('vue:error')
       })
     })
-    
+```
 
 ### 用例：访问 Vue 实例
 
@@ -85,8 +79,7 @@ Nuxt3 会自动读取 plugins 目录下的文件注册为插件，并在创建 V
 
 比如我们之前配置全局实例方法的范例可以做以下简化：两个 `vueApp` 是同一个实例，plugins/alert.ts。
 
-    
-    
+```typescript
     export default defineNuxtPlugin((nuxtApp) => {
       // nuxtApp.hook("app:created", (vueApp) => {
       //   vueApp.config.globalProperties.$alert = (msg: string) => {
@@ -99,15 +92,14 @@ Nuxt3 会自动读取 plugins 目录下的文件注册为插件，并在创建 V
         message.warning(msg);
       };
     });
-    
+```
 
 ### 用例：添加全局帮助方法
 
 一个常见用例是给 NuxtApp 实例提供一些额外的帮助方法，我们可以通过 `nuxtApp.provide(key, fn)`
 定义这些方法，比如下面例子定义了一个格式化日期的帮助方法 `format`：
 
-    
-    
+```typescript
     import dayjs from "dayjs";
     
     export default defineNuxtPlugin((nuxtApp) => {
@@ -115,12 +107,11 @@ Nuxt3 会自动读取 plugins 目录下的文件注册为插件，并在创建 V
         return dayjs(date).format(template);
       });
     });
-    
+```
 
 使用 `useNuxtApp()` 获取这个帮助方法，需要额外加一个 `$`，helper.vue：
 
-    
-    
+```vue
     <template>
       <div>
         <ClientOnly>
@@ -135,14 +126,13 @@ Nuxt3 会自动读取 plugins 目录下的文件注册为插件，并在创建 V
     const date1 = nuxtApp.$format()
     const date2 = nuxtApp.$format(new Date, 'YYYY/MM/DD')
     </script>
-    
+```
 
 #### 给注入方法提供类型支持
 
 通过模块扩展可以给注入的方法、属性提供类型支持，例如前面创建的`format()`方法，创建 ~/types/index.d.ts：
 
-    
-    
+```typescript
     declare module '#app' {
       interface NuxtApp {
         $format (date?: Date, msg?: string): string
@@ -156,7 +146,7 @@ Nuxt3 会自动读取 plugins 目录下的文件注册为插件，并在创建 V
     }
     
     export { }
-    
+```
 
 效果如下：
 

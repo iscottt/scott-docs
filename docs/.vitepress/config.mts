@@ -50,7 +50,7 @@ export default defineConfigWithTheme({
         text:"掘金小册",
         items:[
           { text: "CSS技术揭秘与实战通关", link: "/study/css/background",activeMatch: "/study/css" },
-          { text: "Nuxt3.0全栈开发", link: "/study/Nuxt3.0/lesson-1",activeMatch: "/study/Nuxt3.0" },
+          { text: "Nuxt3.0全栈开发", link: "/study/nuxt/lesson1",activeMatch: "/study/nuxt" },
         ]
       }
     ],

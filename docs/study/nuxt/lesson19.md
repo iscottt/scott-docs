@@ -27,35 +27,32 @@ ts，单独使用不依赖 Prettier。
 
 需要安装依赖：
 
-    
-    
+```bash
     yarn add -D eslint @antfu/eslint-config typescript
-    
+```
 
 ### **配置** **`.eslintrc`**
 
 创建 .eslintrc:
 
-    
-    
+```typescript
     {
       "extends": "@antfu"
     }
-    
+```
 
 ### **添加脚本 package.json**
 
 添加`lint`和`lint:fix`两个命令脚本:
 
-    
-    
+```typescript
     {
       "scripts": {
         "lint": "eslint .",
         "lint:fix": "eslint . --fix"
       }
     }
-    
+```
 
 ### **自动格式化**
 
@@ -64,15 +61,15 @@ ts，单独使用不依赖 Prettier。
   * 安装扩展：[VS Code ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
   * 创建配置文件：`.vscode/settings.json`
-
-    *         {
-          "prettier.enable": false,
-          "editor.formatOnSave": false,
-          "editor.codeActionsOnSave": {
-            "source.fixAll.eslint": true
-          }
-        }
-        
+```typescript
+  {
+    "prettier.enable": false,
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  }
+```
 
 ## 代码测试
 
@@ -80,17 +77,15 @@ ts，单独使用不依赖 Prettier。
 
 ### 安装
 
-    
-    
+```bash
     yarn add --dev @nuxt/test-utils vitest
-    
+```
 
 ### 编写测试
 
 创建 test/index.spec.ts:
 
-    
-    
+```typescript
     import { describe, expect, test } from 'vitest'
     import { $fetch, setup } from '@nuxt/test-utils'
     
@@ -104,7 +99,7 @@ ts，单独使用不依赖 Prettier。
         expect(html).toMatch('<h1>Index Page</h1>')
       })
     })
-    
+```
 
 > 如何使用 vitest 编写单测：<https://vitest.dev/guide/>
 
@@ -112,14 +107,13 @@ ts，单独使用不依赖 Prettier。
 
 添加一个 test:unit 命令执行测试：
 
-    
-    
+```typescript
     {
       "scripts": {
         "test:unit": "vitest"
       }
     }
-    
+```
 
 执行测试，效果如下：
 
@@ -133,17 +127,15 @@ ts，单独使用不依赖 Prettier。
 
 安装模块 @unocss/nuxt：
 
-    
-    
+```bash
     yarn add @unocss/nuxt -D
-    
+```
 
 ### 配置
 
 配置模块，nuxt.config.ts：
 
-    
-    
+```typescript
     export default {
       modules: [
         '@unocss/nuxt',
@@ -158,16 +150,15 @@ ts，单独使用不依赖 Prettier。
         safelist: [],
       },
     }
-    
+```
 
 测试效果，index.vue
 
-    
-    
+```vue
     <h1 class="bg-blue-200">
       Index Page
     </h1>
-    
+```
 
 效果如下：
 
@@ -199,10 +190,9 @@ sets.iconify.design/) 搜索图标，例如我们想要找一个 nuxt
 
 安装该依赖：
 
-    
-    
+```bash
     yarn add @iconify-json/vscode-icons -D
-    
+```
 
 ### 使用图标
 
@@ -210,41 +200,36 @@ sets.iconify.design/) 搜索图标，例如我们想要找一个 nuxt
 
 例如上面的 nuxt 图标规则为：`i-vscode-icons-file-type-nuxt`，就可以像下面这样使用：
 
-    
-    
+```vue
     <div class="i-vscode-icons-file-type-nuxt" />
-    
+```
 
 > 更多相关知识：<https://github.com/unocss/unocss/tree/main/packages/preset-icons/>
 
 ## 整合组件库
 
-[整合
-NaiveUI](https://znu2mxl8tu.feishu.cn/docx/Tn4OdbjuPoyZLsxLXlPcB5MFnDg#LiEOdiGoooOgQexorfwc9H6Fn7f)
+[整合NaiveUI](https://znu2mxl8tu.feishu.cn/docx/Tn4OdbjuPoyZLsxLXlPcB5MFnDg#LiEOdiGoooOgQexorfwc9H6Fn7f)
 在前面课程已有演示，不再赘述。
 
 ## 整合 Pinia
 
-[整合
-Pinia](https://znu2mxl8tu.feishu.cn/docx/GrX9d4Ac7oAyg5xZNaecHXNXnFV#PyOYdskGioMkG2xqiPJcfTxlnqb)
+[整合Pinia](https://znu2mxl8tu.feishu.cn/docx/GrX9d4Ac7oAyg5xZNaecHXNXnFV#PyOYdskGioMkG2xqiPJcfTxlnqb)
 在前面课程已有演示，不再赘述。
 
 ## 使用模版项目
 
 到目前为止，我们的模版已经基本做好了，大家可以将项目推送到 github 以备后续使用，使用方法如下：
 
-    
-    
+```bash
     npx nuxi init -t gh:org/name
-    
+```
 
 上面的 `gh` 是 github 缩写，`org` 为组织名或者用户名，`name` 为项目名，比如我的 github 用户名为 57code，项目名称为
 nuxt3-starter，则初始化项目可以使用下面命令:
 
-    
-    
+```bash
     npx nuxi init -t gh:57code/nuxt3-starter
-    
+```
 
 ## 总结
 

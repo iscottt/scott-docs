@@ -20,7 +20,7 @@
 比如前面章节中在错误处理时，我们就用到过钩子函数：
 
     
-    
+```typescript
     export default defineNuxtPlugin((nuxtApp) => {
       nuxtApp.hook('app:error', (..._args) => {
         console.log('app:error')
@@ -29,16 +29,14 @@
         console.log('vue:error')
       })
     })
-    
+```
 
 ## Nuxt 生命周期分类
 
 由于 Nuxt 整合了 Vue、Nitro 前后端两个运行时，再加上它自身的创建过程，因此框架生命周期钩子分为三类：
 
   * Nuxt 钩子；
-
   * Vue App 钩子；
-
   * Nitro App 钩子。
 
 ### Nuxt 钩子
@@ -48,7 +46,7 @@ Nuxt 钩子在构建时执行，贯穿初始化和构建过程中各种工具和
 基本用法如下：
 
     
-    
+```typescript
     import { defineNuxtModule } from '@nuxt/kit'
     
     export default defineNuxtModule({
@@ -58,14 +56,14 @@ Nuxt 钩子在构建时执行，贯穿初始化和构建过程中各种工具和
         })
       }
     })
-    
+```
 
 我们做一个实际应用作为演示：在整合 NaiveUI 时，如果按照官方操作自动导入，则无法获得 TS 类型支持。
 
 这个需求可以用一个模块来完成：这里利用了 prepare:types 这个钩子配置 ts：
 
     
-    
+```typescript
     import { defineNuxtModule } from '@nuxt/kit'
     
     export default defineNuxtModule({
@@ -78,7 +76,7 @@ Nuxt 钩子在构建时执行，贯穿初始化和构建过程中各种工具和
         })
       }
     })
-    
+```
 
 ### Vue App 钩子
 
@@ -87,20 +85,20 @@ Nuxt 钩子在构建时执行，贯穿初始化和构建过程中各种工具和
 基本用法如下：
 
     
-    
+```typescript
     export default defineNuxtPlugin((nuxtApp) => {
       nuxtApp.hook('app:created', (vueApp) => {
         // 可以在这里修改 vue 实例
       })
     })
-    
+```
 
 我们做一个实际应用作为演示：给 Vue 添加一个全局的方法 $alert。
 
 这个需求可以用一个插件来完成：这里利用了 app:created 这个钩子配置 Vue 实例：
 
     
-    
+```typescript
     // plugins/alert.ts
     export default defineNuxtPlugin((nuxtApp) => {
       nuxtApp.hook("app:created", (vueApp) => {
@@ -110,17 +108,16 @@ Nuxt 钩子在构建时执行，贯穿初始化和构建过程中各种工具和
         };
       });
     });
-    
+```
 
 试用一下，index.vue：
 
-    
-    
+```typescript
     const ins = getCurrentInstance()
     onMounted(() => {
       ins?.proxy?.$alert('component mounted！')
     })
-    
+```
 
 ### Nitro App 钩子
 
@@ -129,7 +126,7 @@ Nuxt 钩子在构建时执行，贯穿初始化和构建过程中各种工具和
 例如下面插件利用 render:html 钩子修改了最终渲染的 html 内容，并在响应时打了一条日志：
 
     
-    
+```typescript
     export default defineNitroPlugin((nitroApp) => {
       nitroApp.hooks.hook('render:html', (html, { event }) => {
         console.log('render:html', html)
@@ -139,7 +136,7 @@ Nuxt 钩子在构建时执行，贯穿初始化和构建过程中各种工具和
         console.log('render:response', response)
       })
     })
-    
+```
 
 ## 可用钩子列表
 

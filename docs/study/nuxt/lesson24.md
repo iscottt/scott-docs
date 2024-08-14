@@ -65,8 +65,7 @@
 
 下面是 schema.prisma：
 
-    
-    
+```prisma
     datasource db {
       provider = "mysql"
       url      = env("DATABASE_URL")
@@ -139,14 +138,13 @@
       WAIT_PAY
       COMPLETED
     }
-    
+```
 
 加一个脚本方便执行，package.json：
 
-    
-    
+```json
     "migrate": "npx prisma migrate dev --name init --schema server/database/schema.prisma"
-    
+```
 
 执行之后的效果如下图：
 

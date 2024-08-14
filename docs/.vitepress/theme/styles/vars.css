@@ -177,7 +177,9 @@
   --vp-code-vue-color: #fff;
   --vp-c-bg-alt: #18181C;
 }
-
+.header-anchor{
+  display: none;
+}
 /**
  * Component: Algolia
  * -------------------------------------------------------------------------- */

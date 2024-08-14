@@ -27,8 +27,7 @@
 
 创建种子（此处省略部分数据），server/database/seed.ts
 
-    
-    
+```typescript
     import { PrismaClient } from '@prisma/client'
     const prisma = new PrismaClient()
     async function main() {
@@ -70,25 +69,20 @@
         await prisma.$disconnect()
         process.exit(1)
       })
-    
+```
 
 配置种子脚本，package.json
 
-    
-    
+```json
     "prisma": {
       "seed": "ts-node server/database/seed.ts"
     },
     "scripts": {
       "seed": "npx prisma db seed"
     },
-    
+```
 
-执行脚本
-
-    
-    
-    yarn seed
+执行脚本`yarn seed`
     
 
 ## 接口实现
@@ -99,8 +93,7 @@
 
 创建两个repository，columnRepository.ts
 
-    
-    
+```typescript    
     import type { Column } from '@prisma/client'
     import prisma from '~/server/database/client'
     
@@ -111,12 +104,11 @@
       })
       return result
     }
-    
+```
 
 courseRepository.ts
 
-    
-    
+```typescript
     import type { Course } from '@prisma/client'
     import prisma from '~/server/database/client'
     
@@ -127,12 +119,11 @@ courseRepository.ts
       })
       return result
     }
-    
+```
 
 实现 indexdata 接口，server/api/indexdata.ts
 
-    
-    
+```typescript
     import { getNewColumns } from '../database/repositories/columnRepository'
     import { getNewCourses } from '../database/repositories/courseRepository'
     
@@ -147,7 +138,7 @@ courseRepository.ts
         return sendError(e, createError('获取数据失败'))
       }
     })
-    
+```
 
 ## 前端页面实现
 
@@ -155,8 +146,7 @@ courseRepository.ts
 
 index.vue
 
-    
-    
+```vue
     <script setup lang="ts">
     useHead({
       title: '羊村学堂',
@@ -193,12 +183,12 @@ index.vue
         type="column"
       />
     </template>
-    
+```
 
 下面定义产品列表，components/ProdList.vue
 
     
-    
+```vue
     <script lang="ts" setup>
     defineProps({
       title: {
@@ -231,12 +221,11 @@ index.vue
         </NGrid>
       </div>
     </template>
-    
+```
 
 商品组件定义，components/Prod.vue
 
-    
-    
+```vue
     <script setup lang="ts">
     import type { Column, Course } from '.prisma/client'
     import type { PropType } from 'vue'
@@ -285,14 +274,13 @@ index.vue
         </div>
       </NCard>
     </template>
-    
+```
 
 ## 错误页
 
 如果发生错误，将显示根目录下 error.vue
 
-    
-    
+```vue
     <script setup>
     defineProps({
       error: Object,
@@ -311,7 +299,7 @@ index.vue
         </NResult>
       </div>
     </template>
-    
+```
 
 ## 下次预告
 

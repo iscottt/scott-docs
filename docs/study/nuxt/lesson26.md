@@ -32,8 +32,7 @@ register 接口类似，不再赘述。
 
 server/api/register.post.ts
 
-    
-    
+```typescript
     import bcrypt from 'bcryptjs'
     import jwt from 'jsonwebtoken'
     import type { User } from '@prisma/client'
@@ -75,12 +74,12 @@ server/api/register.post.ts
         return sendError(e, createError('注册失败!'))
       }
     })
-    
+```
 
 这里用到了数据库操作，我们修改一下之前的代码，server/database/reposirory/userRepository.ts:
 
     
-    
+```typescript
     import type { User } from '@prisma/client'
     import prisma from '~/server/database/client'
     
@@ -97,14 +96,14 @@ server/api/register.post.ts
       const user = await prisma.user.create({ data })
       return user
     }
-    
+```
 
 #### 登录接口
 
 server/api/login.ts
 
     
-    
+```typescript
     import bcrypt from 'bcryptjs'
     import jwt from 'jsonwebtoken'
     import type { User } from '@prisma/client'
@@ -148,7 +147,7 @@ server/api/login.ts
         return sendError(e, createError('登录失败!'))
       }
     })
-    
+```
 
 #### 获取用户信息
 
@@ -156,8 +155,7 @@ server/api/login.ts
 
 /server/api/userinfo.get.ts
 
-    
-    
+```typescript
     import jwt from 'jsonwebtoken'
     import { getUserByUsername } from '../database/repositories/userRepository'
     
@@ -206,7 +204,7 @@ server/api/login.ts
         return sendError(e, createError('获取用户信息失败!'))
       }
     })
-    
+```
 
 ## 请求封装
 
@@ -214,8 +212,7 @@ server/api/login.ts
 
 composabes/request.ts
 
-    
-    
+```typescript
     import { merge } from 'lodash'
     
     type FetchType = typeof $fetch
@@ -284,7 +281,7 @@ composabes/request.ts
     ) {
       return httpRequest<T>('get', request, null, opts)
     }
-    
+```
 
 ## 前端登录注册
 
@@ -300,8 +297,7 @@ composabes/request.ts
 
 login.vue
 
-    
-    
+```vue
     <script setup lang="ts">
     import type { FormInst, FormRules } from 'naive-ui'
     
@@ -380,25 +376,23 @@ login.vue
         </div>
       </NForm>
     </template>
-    
+```
 
 这里用到了全局状态，新增一个 store/user.ts
 
-    
-    
+```typescript
     export const useUser = defineStore('user', {
       state: () => ({
         userInfo: null,
       }),
     })
-    
+```
 
 #### 注册页面逻辑实现
 
 注册页面类似登录页面，但是多了一个确认密码一致性的验证。
 
-    
-    
+```typescript
     const model = ref({
       confirmPass: '', // +++
     })
@@ -422,7 +416,7 @@ login.vue
         trigger: ['blur', 'input'],
       }],
     }
-    
+```
 
 ## 显示用户信息和注销登录
 
@@ -434,8 +428,7 @@ login.vue
 
 根据全局存储的 user 状态决定显示登录按钮还是用户信息，components/MyHeader.vue：
 
-    
-    
+```vue
     <script setup>
     const store = useUser()
     const { userInfo } = storeToRefs(store)
@@ -488,12 +481,11 @@ login.vue
         </div>
       </div>
     </template>
-    
+```
 
 这里用到对话框，注意添加一个 NDialogProvider，app.vue：
 
-    
-    
+```vue
     <NDialogProvider>
       <NMessageProvider>
         <NuxtLayout>
@@ -501,7 +493,7 @@ login.vue
         </NuxtLayout>
       </NMessageProvider>
     </NDialogProvider>
-    
+```
 
 ### 注销登录
 
@@ -509,8 +501,7 @@ login.vue
 
 composables/auth.ts
 
-    
-    
+```typescript
     export function logout() {
       // 清除状态
       const store = useUser()
@@ -528,7 +519,7 @@ composables/auth.ts
       if (route.path !== '/')
         navigateTo('/')
     }
-    
+```
 
 ## 登录状态持久化
 
@@ -536,8 +527,7 @@ composables/auth.ts
 
 default.vue：
 
-    
-    
+```vue
     <script setup lang="ts">
     onMounted(async () => {
       const store = useUser()
@@ -547,7 +537,7 @@ default.vue：
         store.userInfo = data
     })
     </script>
-    
+```
 
 ## 下次预告
 

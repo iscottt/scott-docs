@@ -43,45 +43,45 @@ Nuxt 模块可以以 npm
 
 首先安装模块，我们以 Color-Mode 模块为例演示：
 
-    
-    
+```bash
     yarn add @nuxtjs/color-mode
-    
+```
 
 ### 引入和配置模块
 
 其次引入模块，添加模块到 nuxt.config.ts 文件 `modules` 选项中，有两种添加方式：
 
   * 字符串：此方式仅引入，不配置。
-
-    *         export default defineNuxtConfig({
+```typescript
+        export default defineNuxtConfig({
           modules: ['@nuxtjs/color-mode']
         })
-        
+```
 
   * 数组：此方式在引入模块同时添加行内配置。
 
-    *         export default defineNuxtConfig({
+```typescript
+        export default defineNuxtConfig({
           modules: [["@nuxtjs/color-mode", { preference: "dark" }]],
         })
-        
+```
 
   * 有的模块还可以通过独立配置项配置：
 
-    *         export default defineNuxtConfig({
+```typescript
+        export default defineNuxtConfig({
           modules: ['@nuxtjs/color-mode'],
           colorMode: {
             preference: "dark"
           }
         })
-        
+```
 
 ### 使用模块特性
 
 下面我们在项目中就可以使用模块提供的各种功能了。 例如 Color-Mode 提供的 theme 切换功能，index.vue:
 
-    
-    
+```vue
     <template>
       <div>
         <h1>Color mode: {{ $colorMode.value }}</h1>
@@ -112,7 +112,7 @@ Nuxt 模块可以以 npm
       color: #433422;
     }
     </style>
-    
+```
 
 ## 编写模块
 

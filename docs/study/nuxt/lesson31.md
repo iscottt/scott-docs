@@ -19,25 +19,24 @@
 
   * /purchased-course：已购课程
 
-    * method: get
-    * 返回 { ok: boolean, data: Course[] }
+    * method: <mark>get</mark>
+    * 返回 `{ ok: boolean, data: Course[] }`
   * /userinfo：更新用户信息
 
-    * method：post
+    * method：<mark>post</mark>
     * Body: User
-    * 返回 { ok: boolean }
+    * 返回 `{ ok: boolean }`
   * /changePwd: 改密码
 
-    * method：post
+    * method：<mark>post</mark>
 
-    * body: { oldPwd: string, newPwd: string }
+    * body: `{ oldPwd: string, newPwd: string }`
 
-    * 返回 { ok: boolean }
+    * 返回 `{ ok: boolean }`
 
 创建 server/api/purchased-course.ts
 
-    
-    
+```typescript
     import { isNuxtError } from 'nuxt/app'
     import { getCoursesByUser } from '../database/repositories/orderRepository'
     import { getTokenInfo } from '../database/service/token'
@@ -56,12 +55,11 @@
         return sendError(e, createError('获取数据失败'))
       }
     })
-    
+```
 
 server/database/repositories/orderRepository.ts
 
-    
-    
+```typescript
     export async function getCoursesByUser(userId: number) {
       const orders = await prisma.order.findMany({
         where: {
@@ -82,13 +80,12 @@ server/database/repositories/orderRepository.ts
       const uniqueCourses = courses.filter((course, index, arr) => arr.findIndex(c => c.id === course.id) === index)
       return uniqueCourses
     }
-    
+```
 
 更新用户信息，创建 server/api/userinfo.post.ts，同时修改 userinfo.ts 为
 userinfo.get.ts，以区分两个接口：
 
-    
-    
+```typescript
     import { isNuxtError } from 'nuxt/app'
     import { updateUser } from '../database/repositories/userRepository'
     import { getTokenInfo } from '../database/service/token'
@@ -130,12 +127,11 @@ userinfo.get.ts，以区分两个接口：
         return sendError(e, createError('更新用户信息失败!'))
       }
     })
-    
+```
 
 这里用到 updateUser，userRepository.ts:
 
-    
-    
+```typescript
     export async function updateUser(id, data: Partial<User>) {
       const user = await prisma.user.update({
         where: {
@@ -145,12 +141,11 @@ userinfo.get.ts，以区分两个接口：
       })
       return user
     }
-    
+```
 
 修改密码，创建 server/api/changePwd.post.ts
 
-    
-    
+```typescript
     import { isNuxtError } from 'nuxt/app'
     import bcrypt from 'bcryptjs'
     import { getUserByUsername, updateUser } from '../database/repositories/userRepository'
@@ -202,7 +197,7 @@ userinfo.get.ts，以区分两个接口：
         return sendError(e, createError('更新密码失败!'))
       }
     })
-    
+```
 
 ## 前端页面实现
 
@@ -220,8 +215,7 @@ userinfo.get.ts，以区分两个接口：
 
 首先创建 usercenter.vue：注意这里面结合`<NuxtPage :page-key="pageKey" />`动态显示子页面。
 
-    
-    
+```vue
     <!-- 用户：个人中心页面 -->
     <script setup lang="ts">
     const route = useRoute()
@@ -270,12 +264,10 @@ userinfo.get.ts，以区分两个接口：
       background-color: rgba(229, 231, 235);
     }
     </style>
-    
+```
 
 接下来实现已购课程子页面，buy.vue
-
-    
-    
+```vue
     <script setup lang="ts">
     useHead({ title: '购买记录' })
     
@@ -316,12 +308,11 @@ userinfo.get.ts，以区分两个接口：
         </template>
       </div>
     </template>
-    
+```
 
 下面是用户信息显示和修改，info.vue：
 
-    
-    
+```vue
     <!-- 修改资料页面 -->
     <script setup lang="ts">
     import type { IResult } from '../../types/IResult'
@@ -389,12 +380,11 @@ userinfo.get.ts，以区分两个接口：
         </NForm>
       </div>
     </template>
-    
+```
 
 最后是修改密码页，pwd.vue：
 
-    
-    
+```vue
     <script setup lang="ts">
     import type { FormInst } from 'naive-ui'
     import type { IResult } from '~/types/IResult'
@@ -468,7 +458,7 @@ userinfo.get.ts，以区分两个接口：
         </NForm>
       </div>
     </template>
-    
+```
 
 完成！最终效果如下：
 

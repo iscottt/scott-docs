@@ -24,15 +24,15 @@
 
   * /course/[id]：获取指定课程详情
 
-    * 返回 { ok: boolean, data: { item: Course, recommend: Course[] }}
+    * 返回 <mark>{ ok: boolean, data: { item: Course, recommend: Course[] }}</mark>
   * /column/[id]：分页获取专栏列表
 
-    * 返回 { ok: boolean, data: { item: Column, recommend: Column[] }}
+    * 返回 <mark>{ ok: boolean, data: { item: Column, recommend: Column[] }}</mark>
 
 更新两个 repository，columnRepository.ts
 
     
-    
+```typescript
     export async function getColumnById(id: number): Promise<Column | null> {
       const result = await prisma.column.findFirst({
         where: {
@@ -41,12 +41,11 @@
       })
       return result
     }
-    
+```
 
 courseRepository.ts：这里涉及关联数据 catalogue 查询
 
-    
-    
+```typescript
     export async function getCourseById(id: number): Promise<Course | null> {
       const result = await prisma.course.findFirst({
         where: {
@@ -56,12 +55,12 @@ courseRepository.ts：这里涉及关联数据 catalogue 查询
       })
       return result
     }
-    
+```
 
 分别实现 course 和 column 接口，server/api/course/[id].ts
 
     
-    
+```typescript
     import { getCourseById, getCourses } from '~/server/database/repositories/courseRepository'
     
     export default defineEventHandler(async (e) => {
@@ -81,12 +80,11 @@ courseRepository.ts：这里涉及关联数据 catalogue 查询
         return sendError(e, createError({ statusCode: 500, statusMessage: '服务器错误' }))
       }
     })
-    
+```
 
 server/api/column/[id].ts
 
-    
-    
+```typescript
     import { getColumnById, getColumns } from '~/server/database/repositories/columnRepository'
     
     export default defineEventHandler(async (e) => {
@@ -106,7 +104,7 @@ server/api/column/[id].ts
         return sendError(e, createError({ statusCode: 500, statusMessage: '服务器错误' }))
       }
     })
-    
+```
 
 ## 前端页面实现
 
@@ -124,8 +122,7 @@ server/api/column/[id].ts
 
 下面完成详情页，[id].vue
 
-    
-    
+```vue
     <script setup lang="ts">
     import type { IResult } from '~/types/IResult'
     
@@ -220,12 +217,11 @@ server/api/column/[id].ts
       max-width: 100% !important;
     }
     </style>
-    
+```
 
 这里提出来一个 Tabs 和 Catalogue 组件，分别如下：
 
-    
-    
+```vue
     <!-- 搜索结果页tab组件 -->
     <script setup lang="ts">
     defineProps({
@@ -263,12 +259,11 @@ server/api/column/[id].ts
         @apply text-green-400 border-green-500;
     }
     </style>
-    
+```
 
 Catalouge.vue
 
-    
-    
+```vue
     <script setup lang="ts">
     import type { Catalogue } from '.prisma/client'
     
@@ -292,7 +287,7 @@ Catalouge.vue
         </li>
       </ul>
     </template>
-    
+```
 
 效果如下：
 

@@ -3,13 +3,9 @@
 上一讲我们学习了如何基于 API Route 编写接口，有了接口就需要获取数据，Nuxt3 中提供的多种数据访问 API：
 
   * $fetch；
-
   * useAsyncData；
-
   * useLazyAsyncData；
-
   * useFetch；
-
   * useLazyFetch。
 
 ## 为什么需要 $fetch？
@@ -27,11 +23,10 @@
 
 上节课我们用到了`$fetch`，我们会像下面这样使用它:
 
-    
-    
+```typescript
     const { data } = await $fetch('/api/hello', { query: { name: 'tom' } })
     const { result } = await $fetch('/api/post', { method: 'post', body: newPost })
-    
+```
 
 可以看到，$fetch 的 API 和 fetch 是一样的，实际调用的是
 [unjs/ofetch](https://github.com/unjs/ofetch)。它的用法符合我们之前的编码习惯，返回
@@ -49,8 +44,7 @@ $fetch，给用户提供响应式数据便于直接使用。下面我们一起�
 
 `useFetch`方法签名：
 
-    
-    
+```typescript
     function useFetch(
       url: string | Request | Ref<string | Request> | () => string | Request,
       options?: UseFetchOptions<DataT>
@@ -63,14 +57,13 @@ $fetch，给用户提供响应式数据便于直接使用。下面我们一起�
       execute: () => Promise<void> // 同 refresh，没有去重选项
       error: Ref<Error | boolean> // 错误信息
     }
-    
+```
 
 我们实践一下，将前面的博客列表获取操作重构为`useFetch()`方式。
 
 很明显，我们处理各种状态更便捷了！index.vue：
 
-    
-    
+```vue
     <template>
       <div class="flex items-center flex-col gap-2 py-4">
         <!-- 处理请求错误 -->
@@ -92,7 +85,7 @@ $fetch，给用户提供响应式数据便于直接使用。下面我们一起�
       // const posts = await $fetch("/api/posts");
       const { data: posts, pending, error } = await useFetch('/api/posts')
     </script>
-    
+```
 
 ### useLazyFetch
 
@@ -101,10 +94,9 @@ $fetch，给用户提供响应式数据便于直接使用。下面我们一起�
 
 前面的例子，将 useFetch 替换为 useLazyFetch 同样可行：
 
-    
-    
+```typescript
     const { data: posts, pending, error } = await useLazyFetch('/api/posts')
-    
+```
 
 ### useAsyncData
 
@@ -115,8 +107,7 @@ $fetch，给用户提供响应式数据便于直接使用。下面我们一起�
 `useAsyncData`签名如下，因此 useAsyncData 有两种用法：一种传 key，一种不传 key，但是即使你不传，Nuxt
 也会帮你生成一个，所以该用哪个不用我说了吧！？
 
-    
-    
+```typescript
     function useAsyncData(
       handler: (nuxtApp?: NuxtApp) => Promise<DataT>,
       options?: AsyncDataOptions<DataT>
@@ -126,12 +117,11 @@ $fetch，给用户提供响应式数据便于直接使用。下面我们一起�
       handler: (nuxtApp?: NuxtApp) => Promise<DataT>,
       options?: AsyncDataOptions<DataT>
     ): Promise<AsyncData<DataT>>
-    
+```
 
 我们实践一下，用 `useAsyncData` 获取文章内容数据，detail/[id].vue：
 
-    
-    
+``` vue
     <template>
       <div class="p-5">
         <div v-if="pending">加载中...</div>
@@ -147,7 +137,7 @@ $fetch，给用户提供响应式数据便于直接使用。下面我们一起�
     const fetchPost = () => $fetch(`/api/detail/${router.params.id}`);
     const { data, pending } = await useAsyncData(fetchPost);
     </script>
-    
+```
 
 ### useLazyAsyncData
 
@@ -161,30 +151,27 @@ $fetch，给用户提供响应式数据便于直接使用。下面我们一起�
 我们可以使用`useFetch()`等 API 返回的`refresh()`刷新数据。需要注意，如果请求的 key
 参数没有发生变化，我们实际上拿到的还是之前缓存的结果。例如下面代码执行 `refresh()` 并不会得到最新数据：
 
-    
-    
+```
     const { data, refresh } = useFetch('/api/somedata')
     // 数据并没有刷新！
     refresh()
-    
+```
 
 而想要获取最新数据，就要在 url 中添加一个参数，并作为函数返回值传给`useFetch`：
 
-    
-    
+```
     // url需要改为由函数返回
     const { data, refresh } = useFetch(() => `/api/somedata?page=${page}`)
     // 数据刷新！
     page++
     refresh()
-    
+```
 
 ### 范例：分页获取文章列表
 
 下面的范例在请求参数上添加一个页码，则页码变化后再刷新就可以得到最新的数据了，index.vue：
 
-    
-    
+``` vue
     <script setup lang="ts">
     const page = ref(1);
     const {
@@ -204,12 +191,11 @@ $fetch，给用户提供响应式数据便于直接使用。下面我们一起�
       refresh();
     }
     </script>
-    
+```
 
 相应的，我们需要修改 posts 接口，posts.ts：
 
-    
-    
+``` typescript
     export default defineEventHandler((event) => {
       // 获取当前页码 page
       const query = getQuery(event);
@@ -224,7 +210,7 @@ $fetch，给用户提供响应式数据便于直接使用。下面我们一起�
         .sort((a, b) => (a.date < b.date ? 1 : -1))
         .slice(start, end);
     });
-    
+```
 
 ## 总结
 

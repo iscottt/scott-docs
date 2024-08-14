@@ -26,8 +26,7 @@
 首先是 banner 高度调整，之前高度为 400px，移动端显然要低一些，我们按照 1024 / 375 的比例缩放到 150px
 左右，pages/index.vue：
 
-    
-    
+```vue
       <n-carousel show-arrow class="mb-6">
         <div
           v-for="item in slides" :key="item.label"
@@ -40,7 +39,7 @@
           {{ item.label }}
         </div>
       </n-carousel>
-    
+```
 
 看一下效果：
 
@@ -49,8 +48,7 @@
 接下来是调整布局整体最小宽度，之前有设置一个 min-w-[1024px]，现在显然需要是大于 1024px
 之后才起作用，layouts/default.vue：
 
-    
-    
+```vue
     <div 
         class="bg-gray-100 flex flex-col min-h-screen
     -     min-w-[1024px]
@@ -62,7 +60,7 @@
         </main>
         <MyFooter />
       </div>
-    
+```
 
 效果如下：
 
@@ -71,13 +69,12 @@
 登录按钮溢出去了，这是因为 padding 没有算在容器宽度内，大屏下空间充裕看不出来。可以看到，我们添加了 box-border，同时缩小了小屏下的
 padding 值，MyHeader.vue：
 
-    
-    
+```vue
     <div class="container m-auto flex items-center h-[60px]
     -  px-4" 
     +  lg:px-4 px-2 box-border"
     >
-    
+```
 
 效果好多了：
 
@@ -86,8 +83,7 @@ padding 值，MyHeader.vue：
 最后是课程和专栏列表显示调整，在小屏中只需要显示一列，这可以利用 NGrid 的响应式特性。例如，ProdList.vue 组件中定义响应式的
 cols：之前是写死的 4 列，现在则是 m 断点时才显示 4 列，小屏显示 1 列，这里大家显然可以做得再细一点，比如 iPad 宽度下显示两列。
 
-    
-    
+```vue
     <NGrid responsive="screen" x-gap="12" class="mb-6"
     -  :cols="4"
     +  cols="1 m:4"
@@ -96,7 +92,7 @@ cols：之前是写死的 4 列，现在则是 m 断点时才显示 4 列，小�
         <Prod :data="item" :type="type" />
       </NGi>
     </NGrid>
-    
+```
 
 > 还有值得注意的点，naive-ui 中断点和 tailwind 不甚相同，可以通过 NConfigProvider 修改。
 
@@ -133,8 +129,7 @@ Nuxt 中封装了 vue-router，想要获取路由器实例可以通过 useRouter
 下面我们创建一个 auth 中间件，通过判断是否存在 token 判断用户是否登录，通过 navigateTo 重定向。创建
 ~/middleware/auth.ts：
 
-    
-    
+```typescript
     export default defineNuxtRouteMiddleware((to, from) => {
       const token = useCookie('token')
       const route = useRoute()
@@ -147,7 +142,7 @@ Nuxt 中封装了 vue-router，想要获取路由器实例可以通过 useRouter
         return navigateTo(`/login?from=${route.fullPath}`)
       }
     })
-    
+```
 
 ### 注册中间件
 
@@ -155,12 +150,11 @@ Nuxt 中封装了 vue-router，想要获取路由器实例可以通过 useRouter
 
 pages/usercenter.vue
 
-    
-    
+```typescript
     definePageMeta({
       middleware: ['auth'],
     })
-    
+```
 
 同样的还有订单和支付页，不再赘述。最终效果如下：
 
@@ -181,8 +175,7 @@ pages/usercenter.vue
 
 我们结合 naive-ui 骨架屏组件完成一个加载进度反馈实现，~/components/Loading.vue:
 
-    
-    
+```vue
     <script setup lang="ts">
     const props = defineProps({
       pending: {
@@ -222,13 +215,12 @@ pages/usercenter.vue
         </template>
       </div>
     </template>
-    
+```
 
 我们在 Loading
 中实现了默认的骨架屏模版，在不同页面使用的时候还需要根据内容做调整，比如我们会给课程列表和专栏列表专门做一个骨架屏组件，components/LoadingCourseSkeleton.vue：
 
-    
-    
+```vue
     <template>
       <NGrid :x-gap="20" :y-gap="5" :cols="4">
         <NGridItem v-for="i in 8" :key="i">
@@ -242,15 +234,14 @@ pages/usercenter.vue
         </NGridItem>
       </NGrid>
     </template>
-    
+```
 
 下面在页面中使用 Loading，我们只需引入 pending 状态并设置在 Loading 的 pending
 属性上即可。同时，我们还替换了默认的骨架屏为 LoadingCourseSkeleton，这样出来的效果一致性更好！
 
 pages/list/[type].vue
 
-    
-    
+```vue
     <script setup lang="ts">
     const {
        data,
@@ -281,7 +272,7 @@ pages/list/[type].vue
     +    </template>
     +  </Loading>
      </template>
-    
+```
 
 最终效果如下：
 

@@ -28,9 +28,8 @@ Nuxt 中约定把组件放在`components/`目录中，这些组件只要被用�
 
 创建 components/Navbar.vue：
 
-    
-    
-    <template>
+```vue
+<template>
       <nav
         class="border-b border-slate-200 px-5 py-2 flex items-center justify-between"
       >
@@ -42,67 +41,61 @@ Nuxt 中约定把组件放在`components/`目录中，这些组件只要被用�
         />
       </nav>
     </template>
-    
+```
 
 下面就可以直接使用了，layouts/default.vue:
 
-    
-    
-    <template>
+```vue
+<template>
       <div>
         <Navbar></Navbar>
         <slot />
       </div>
     </template>
-    
+```
 
 ### 组件名称约定
 
 没有嵌套的组件会以文件名直接导入，但如果存在嵌套关系呢？例如下面的路径：
 
-    
-    
+```
     | components/
     --| base/
     ----| foo/
     ------| Button.vue
-    
+```
 
 那么 **组件名称将会基于路径和文件名以大驼峰方式连起来**
 ，比如上面的`base/foo/Button.vue`注册名称将会是`BaseFooButton`，用起来将会像下面这样：
 
-    
-    
-    <BaseFooButton />
-    
+```
+<BaseFooButton />
+```
 
 我们尝试一下，从 Navbar 中提取一个 Avatar 组件，以便后续添加其他功能，路径像下面这样设计：
 
-    
-    
+```
     | components/
     --| nav/
     ----| Bar.vue
     --- Avatar.vue
-    
+```
 
 这样，访问导航组件的名称是：`NavBar`，注意`Bar`变成大写了，default.vue：
 
-    
-    
-    <template>
+```vue
+<template>
       <div>
         <NavBar></NavBar>
         <slot />
       </div>
     </template>
-    
+    ```
 
 再看看 Bar.vue 的变化：
 
-    
-    
-    <template>
+```vue
+<template>
       <nav
         class="border-b border-slate-200 px-5 py-2 flex items-center justify-between"
       >
@@ -110,20 +103,19 @@ Nuxt 中约定把组件放在`components/`目录中，这些组件只要被用�
         <Avatar></Avatar>
       </nav>
     </template>
-    
+```
 
 最后创建 components/Avatar.vue：
 
-    
-    
-    <template>
+```vue
+ <template>
       <img
         class="w-[50px] border-[1px] border-slate-300 rounded-full inline-block"
         src="~/assets/avatar.png"
         alt="avatar"
       />
     </template>
-    
+```
 
 ## 整合组件库：Naive UI
 
@@ -144,19 +136,17 @@ Nuxt 中约定把组件放在`components/`目录中，这些组件只要被用�
 
 配置，nuxt.config.ts：
 
-    
-    
-    // https://nuxt.com/docs/api/configuration/nuxt-config
+```typescript
+// https://nuxt.com/docs/api/configuration/nuxt-config
     export default defineNuxtConfig({
       modules: ["@huntersofbook/naive-ui-nuxt"],
     });
-    
+```
 
 测试一下，index.vue：
 
-    
-    
-    <template>
+```vue
+<template>
       <div class="flex items-center flex-col gap-2">
         <h1>Index Page</h1>
         <div>
@@ -165,7 +155,7 @@ Nuxt 中约定把组件放在`components/`目录中，这些组件只要被用�
         <NuxtLink to="/detail/1">detail 1</NuxtLink>
       </div>
     </template>
-    
+```
 
 效果如下：
 
@@ -181,19 +171,20 @@ Nuxt 中约定把组件放在`components/`目录中，这些组件只要被用�
 
   * 可以通过设置 nuxt.config.ts 中 `imports` 选项自定义扫描目录：
 
-    *         export default defineNuxtConfig({
-          imports: {
-            dirs: [
-              // 扫描顶层目录中模块
-              'composables',
-              // 扫描内嵌一层深度的模块，指定特定文件名和后缀名
-              'composables/*/index.{ts,js,mjs,mts}',
-              // 扫描给定目录中所有模块
-              'composables/**'
-            ]
-          }
-        })
-        
+```typescript
+export default defineNuxtConfig({
+  imports: {
+    dirs: [
+      // 扫描顶层目录中模块
+      'composables',
+      // 扫描内嵌一层深度的模块，指定特定文件名和后缀名
+      'composables/*/index.{ts,js,mjs,mts}',
+      // 扫描给定目录中所有模块
+      'composables/**'
+    ]
+  }
+})
+```
 
 ## 下次预告
 

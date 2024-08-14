@@ -29,9 +29,8 @@
 
 前面的文件结构，生成的路由配置大概像下面这样：
 
-    
-    
-    [
+``` javascript
+[
       {
         path: '/',
         component: '~/pages/index.vue',
@@ -41,7 +40,7 @@
         component: '~/pages/detail.vue',
       }
     ]
-    
+```
 
 虽然免去繁琐的配置工作，但是需要我们首先去了解一下约定好的映射规则，下面我们先看一下动态路由。
 
@@ -49,28 +48,25 @@
 
 如果 **文件名或者文件夹名称里面包含了方括号** ，它们将被转换为动态路由参数。比如我们像下面这样修改文件结构：
 
-    
-    
-    pages/
-    --- index.vue
-    --- detail-[id].vue
-    
+```
+pages/
+  --- index.vue
+  --- detail-[id].vue
+```
 
 我们可以在`detail-[id].vue`中访问`id`这个参数:
 
-    
-    
-    <template>
-      {{ $route.params.id }}
-    </template>
-    
+``` vue
+  <template>
+    {{ $route.params.id }}
+  </template>
+```
 
 对应的我们在主页中添加一篇文章链接：`/detail-1`
 
-    
-    
-    <NuxtLink to="/detail-1">detail 1</NuxtLink>
-    
+``` vue
+<NuxtLink to="/detail-1">detail 1</NuxtLink>
+```
 
 效果非常理想！
 
@@ -80,30 +76,27 @@
 
 前面的路径`/detail-1`相当丑陋，我们希望是`/detail/1`，则再创建一个文件夹包起来即可：
 
-    
-    
-    pages/
+```
+pages/
     --- index.vue
     --- detail/
     ------[id].vue
-    
+```
 
 创建`/detail/`目录，移动`detail-[id].vue`的过去，重命名为`[id].vue`，这实际上创建了如下路由配置：
 
-    
-    
-    {
+``` javascript 
+{
       path: '/detail/:id',
       component: '~/pages/detail/[id].vue'
     }
-    
+```
 
 修改`/index.vue`中跳转链接：
 
-    
-    
-    <NuxtLink to="/detail/1">detail 1</NuxtLink>
-    
+``` vue
+<NuxtLink to="/detail/1">detail 1</NuxtLink>
+```
 
 效果非常理想！
 
@@ -113,20 +106,18 @@
 
 如果存在目录和文件同名，就制造了嵌套路由。比如下面目录结构：
 
-    
-    
-    pages/
+```
+pages/
     --- detail/
     ------[id].vue
     --- detail.vue
     --- index.vue
-    
+```
 
 这实际上创建了如下路由配置：
 
-    
-    
-    {
+``` javascript
+{
       path: '/detail',
       component: '~/pages/detail.vue',
       children: [
@@ -136,31 +127,29 @@
         }
       ]
     }
-    
+```
 
 看一下 detail.vue 中的具体实现：需要添加路由出口`<NuxtPage>`。
 
-    
-    
-    <template>
+```vue
+<template>
       <div>
         <h1>Detail Page</h1>
         <NuxtPage></NuxtPage>
       </div>
     </template>
-    
+```
 
 相应的，`[id].vue`中的标题不需要了：
 
-    
-    
-    <template>
+```vue
+<template>
       <div>
         <!-- <h1>Detail Page</h1> -->
         <p>{{ $route.params.id }}</p>
       </div>
     </template>
-    
+```
 
 测试效果和刚才一样！
 
@@ -174,26 +163,24 @@ Nuxt 提供了布局系统，可以把公用的页面布局内容提取到`layou
 
 首先创建 /layouts/default.vue 作为默认布局页：
 
-    
-    
-    <template>
+```vue
+<template>
       <div>
         <nav>导航栏</nav>
         <slot />
       </div>
     </template>
-    
+```
 
 `app.vue`中将页面内容作为布局页的插槽：
 
-    
-    
-    <template>
+```vue
+<template>
       <NuxtLayout>
         <NuxtPage></NuxtPage>
       </NuxtLayout>
     </template>
-    
+```
 
 看一下效果：非常好！
 

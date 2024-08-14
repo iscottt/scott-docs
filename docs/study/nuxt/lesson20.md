@@ -63,8 +63,7 @@ Docker 安装好之后，就可以找到合适的镜像安装所需软件，我�
 
 首先，我们在项目根目录下创建一个 `docker-compose.yml` 文件，并粘贴如下内容：
 
-    
-    
+```yml
     version: '3.7'
     services:
       mysql_db_container:
@@ -85,14 +84,13 @@ Docker 安装好之后，就可以找到合适的镜像安装所需软件，我�
     
     volumes:
       mysql_db_data_container:
-    
+```
 
 然后使用 docker-compose 命令拉取镜像，在命令行输入如下命令：
 
-    
-    
+```bash
     docker compose up -d
-    
+```
 
 执行结束，效果如下：
 
@@ -105,7 +103,7 @@ Docker 安装好之后，就可以找到合适的镜像安装所需软件，我�
 ## 使用 Adminer
 
 下面就可以通过 Adminer
-管理数据库了，浏览器中输入：[http://localhost:8080，](http://localhost:8080%EF%BC%8C)
+管理数据库了，浏览器中输入：`http://localhost:8080`
 
 这里用户名输入：root，密码输入：rootpassword（如果修改了，就输入修改过的密码），效果如下：
 

@@ -19,8 +19,7 @@
 
 下面我们创建基础布局，layouts/default.vue
 
-    
-    
+```vue
     <template>
       <div class="min-w-[1024px] bg-gray-100 flex flex-col min-h-screen">
         <MyHeader />
@@ -30,7 +29,7 @@
         <MyFooter />
       </div>
     </template>
-    
+```
 
 ### MyHeader 组件
 
@@ -38,8 +37,7 @@
 
 MyHeader 组件：包含 logo、导航栏、登录按钮或用户信息。
 
-    
-    
+```vue
     <script setup>
     const route = useRoute()
     const menus = ref([
@@ -75,12 +73,11 @@ MyHeader 组件：包含 logo、导航栏、登录按钮或用户信息。
         </div>
       </div>
     </template>
-    
+```
 
 Menu.vue 组件：
 
-    
-    
+```vue
     <script setup>
     defineProps({
       active: {
@@ -102,14 +99,13 @@ Menu.vue 组件：
       color: rgb(52, 157, 96);
     }
     </style>
-    
+```
 
 ### MyFooter组件
 
 MyFooter组件：链接和版权信息。
 
-    
-    
+```vue
     <template>
       <div class="mt-auto bg-dark-400 text-light-500">
         <div class="flex items-center justify-center pb-1 pt-2">
@@ -121,7 +117,7 @@ MyFooter组件：链接和版权信息。
         </div>
       </div>
     </template>
-    
+```
 
 ## 登录/注册布局
 
@@ -133,8 +129,7 @@ MyFooter组件：链接和版权信息。
 
 下面创建登录布局组件，layouts/blank.vue：
 
-    
-    
+```vue
     <template>
       <div class="min-h-screen flex justify-center items-center bg-gray-100">
         <div class="shadow-lg bg-white rounded-lg p-5">
@@ -142,7 +137,7 @@ MyFooter组件：链接和版权信息。
         </div>
       </div>
     </template>
-    
+```
 
 ## 应用布局
 
@@ -150,8 +145,7 @@ MyFooter组件：链接和版权信息。
 
 首先给 app.vue 添加布局组件：
 
-    
-    
+```vue
     <template>
       <div>
         <NMessageProvider>
@@ -169,7 +163,7 @@ MyFooter组件：链接和版权信息。
       text-decoration: none;
     }
     </style>
-    
+```
 
 ### 创建页面
 
@@ -186,17 +180,15 @@ MyFooter组件：链接和版权信息。
 course.vue 和 column.vue 使用默认布局，也暂时不需要内容。login.vue 和 register.vue 需要明确指定 blank
 布局：
 
-    
-    
+```typescript
     definePageMeta({
       layout: 'blank',
     })
-    
+```
 
 下面是 login.vue 和 register.vue 完整内容：
 
-    
-    
+```vue
     <script setup lang="ts">
     useHead({
       title: '登录',
@@ -277,7 +269,7 @@ course.vue 和 column.vue 使用默认布局，也暂时不需要内容。login.
         </div>
       </NForm>
     </template>
-    
+```
 
 ## 最终效果
 

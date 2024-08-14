@@ -37,7 +37,7 @@
 就像下面这样配置，nuxt.config.ts：
 
     
-    
+```typescript
     export default defineNuxtConfig({
       extends: [
         '../base',                     // 从本地继承
@@ -45,7 +45,7 @@
         'github:my-themes/awesome#v1', // 从 github 下载
       ]
     })
-    
+```
 
 ### 范例：使用 docus 建设文档网站
 
@@ -54,24 +54,21 @@
 
 首先安装 docus：
 
-    
-    
+```bash
     yarn add @nuxt-themes/docus
-    
+```
 
 接下来只需要在项目中添加 extends 选项，nuxt.config.ts：
 
-    
-    
+```typescript
     defineNuxtConfig({
       extends: '@nuxt-themes/docus'
     })
-    
+```
 
 这就好了！下面在 content 目录创建一个页面试试，content/index.md：
 
-    
-    
+```markdown
     ---
     title: "Get Started"
     description: "Let's learn how to use my amazing module."
@@ -94,7 +91,7 @@
     ## 配置页面
     
     ### layout
-    
+```
 
 效果如下：
 
@@ -109,17 +106,15 @@
 下面我们重构之前案例为如下结构：nuxt-docus 是之前的 docus 项目， base 基于 layers 结构存放公用资源，nuxt-app 使用
 base 中的资源。
 
-    
-    
+```
     base/
     nuxt-app/
     nuxt-docus/
-    
+```
 
 base 中至少应该存放一个 nuxt.config.ts 文件，存放一些通用配置，这指明当前目录是一个 layers 结构:
 
-    
-    
+```typescript
     export default defineNuxtConfig({
       app: {
         head: {
@@ -130,12 +125,11 @@ base 中至少应该存放一个 nuxt.config.ts 文件，存放一些通用配�
         }
       }
     })
-    
+```
 
 同时我们再创建一个公用组件 BaseButton.vue:
 
-    
-    
+```vue
      <template>
       <button
         class="text-white px-4 py-2 flex-1 flex items-center justify-center shadow-lg rounded bg-sky-500 hover:bg-sky-600"
@@ -143,12 +137,11 @@ base 中至少应该存放一个 nuxt.config.ts 文件，存放一些通用配�
         <slot>按钮</slot>
       </button>
     </template>
-    
+```
 
 准备就绪，我们在 nuxt-app 中配置该继承 base：
 
-    
-    
+```typescript
     // https://nuxt.com/docs/api/configuration/nuxt-config
     export default defineNuxtConfig({
       modules: [
@@ -158,23 +151,21 @@ base 中至少应该存放一个 nuxt.config.ts 文件，存放一些通用配�
         '../base'
       ]
     })
-    
+```
 
 现在 app.vue 中可以直接使用 BaseButton：
 
-    
-    
+```vue
     <BaseButton></BaseButton>
-    
+```
 
 ### 从模版项目开始定制 layers
 
 Nuxi 有个命令可以初始化一个 layer 结构让我们快速开始：
 
-    
-    
+```bash
     npx nuxi init --template layer nuxt-layer
-    
+```
 
 ## 总结
 

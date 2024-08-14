@@ -33,28 +33,25 @@
 ## 接口实现
 
 我们需要实现两个接口：
+```typescript
+   /order：创建订单。
+     method: post
+     body：{ courseId: number }
+     返回 { ok: boolean, data: { orderId: number } }
 
-  * /order：创建订单。
+   /order/[id]：获取订单详情。
+     method：get
+     返回 { ok: boolean, data: Order }
 
-    * method: post
-    * body：{ courseId: number }
-    * 返回 { ok: boolean, data: { orderId: number } }
-  * /order/[id]：获取订单详情。
-
-    * method：get
-    * 返回 { ok: boolean, data: Order }
-  * /order: 更新订单状态。
-
-    * method：patch
-
-    * body: { id: number, status: string }
-
-    * 返回 { ok: boolean }
-
-创建 orderRepository，server/database/repositories/orderRepository.ts
+   /order: 更新订单状态。
+     method：patch
+     body: { id: number, status: string }
+     返回 { ok: boolean }
+```
+创建 `orderRepository，server/database/repositories/orderRepository.ts`
 
     
-    
+```typescript
     import type { Order } from '@prisma/client'
     import prisma from '~/server/database/client'
     
@@ -90,7 +87,7 @@
       })
       return result
     }
-    
+```
 
 分别实现 3 个接口：
 
@@ -102,8 +99,7 @@
 
 server/api/order.post.ts
 
-    
-    
+```typescript
     import type { Order } from '@prisma/client'
     import { OrderStatus } from '@prisma/client'
     import { isNuxtError } from 'nuxt/app'
@@ -128,12 +124,11 @@ server/api/order.post.ts
     
       return { ok: true, data: { orderId: o.id } }
     })
-    
+```
 
 更新订单，server/api/order.patch.ts
 
-    
-    
+```typescript
     import { updateOrder } from '../database/repositories/orderRepositor'
     
     export default defineEventHandler(async (e) => {
@@ -147,12 +142,11 @@ server/api/order.post.ts
         return sendError(e, createError('订单状态更新失败'))
       }
     })
-    
+```
 
 订单详情，server/api/order/[id].ts
 
-    
-    
+```typescript
     import { getOrderById } from '~/server/database/repositories/orderRepositor'
     
     export default defineEventHandler(async (e) => {
@@ -166,7 +160,7 @@ server/api/order.post.ts
       const order = await getOrderById(id)
       return { ok: true, data: order }
     })
-    
+```
 
 ## 前端页面实现
 
@@ -180,8 +174,7 @@ server/api/order.post.ts
 
 [id].vue
 
-    
-    
+```typescript
     const subscribe = async () => {
       // 创建订单
       const { ok, data } = await httpPost<IResult>('/api/order', { courseId: id })
@@ -191,12 +184,11 @@ server/api/order.post.ts
         navigateTo(`/order-confirm/?id=${data.orderId}`)
       }
     }
-    
+``
 
 接下来实现订单确认，我们获取订单详情和关联的课程内容，order-confirm.vue
 
-    
-    
+```vue
     <script setup lang="ts">
     import type { IResult } from '../types/IResult'
     
@@ -243,12 +235,11 @@ server/api/order.post.ts
         </div>
       </NCard>
     </template>
-    
+```
 
 最后是支付页，这里刻意简化了支付流程，实际上二维码是后端生成的支付链接生成的，同时前端页面应该轮询支付状态，待成功之后跳转页面。order-pay.vue：
 
-    
-    
+```vue
     <script setup lang="ts">
     import type { Course } from '.prisma/client'
     import type { IResult } from '../types/IResult'
@@ -300,12 +291,11 @@ server/api/order.post.ts
         </NCard>
       </div>
     </template>
-    
+```
 
 这个页面用到一个倒计时器，Counter.vue：
 
-    
-    
+```vue
     <script setup lang="ts">
     const props = defineProps({
       expires: {
@@ -352,7 +342,7 @@ server/api/order.post.ts
         {{ transform(timeout) }}
       </div>
     </template>
-    
+```
 
 完成！最终效果如下：
 

@@ -205,10 +205,10 @@ hh:mm:ss| 混合日期和时间值，时间戳
 当然，我们也可以使用 **INSERT INTO** SQL 语句来插入数据：
 
     
-    
+```sql
     INSERT INTO table_name ( field1, field2,...fieldN )
            VALUES ( value1, value2,...valueN );
-    
+```
 
 点击“SQL 命令”：
 
@@ -216,11 +216,10 @@ hh:mm:ss| 混合日期和时间值，时间戳
 
 输入如下 SQL 语句：
 
-    
-    
+```sql
     INSERT INTO `course` (`cover`, `price`, `t_price`, `title`, `desc`)
     VALUES ('https://wechatapppro-1252524126.file.myqcloud.com/appwhrkrsz84443/image/b_u_62a4204687f44_cOGIFKdC/l4gf7c0s0770.jpeg', '299.00', '399.00', 'Vue源码全家桶', '<h3>Vue源码全家桶剖析加手写</h3>\r\n<ul><li>Vue2 + Vue3</li><li>Vue-Router</li><li>Vuex + Pinia</li></ul>');
-    
+```
 
 点击“执行”，结果如下：
 
@@ -240,8 +239,7 @@ hh:mm:ss| 混合日期和时间值，时间戳
 
 当然，我们可以使用 SQL 语句，这样可以更新不止一条数据：
 
-    
-    
+```sql
     UPDATE `course` SET
     `id` = '1',
     `cover` = 'https://wechatapppro-1252524126.file.myqcloud.com/appwhrkrsz84443/image/b_u_62a4204687f44_cOGIFKdC/l4e6hk9v0562.png',
@@ -250,7 +248,7 @@ hh:mm:ss| 混合日期和时间值，时间戳
     `title` = 'Vue3 开源组件库实战',
     `desc` = '<h3>从架构到发布全流程实战</h3>\r\n<p>Vue3 + Vite2 + VitePress + TSX + Tailwind</p>'
     WHERE `id` = '1';
-    
+```
 
 ### 查询数据
 
@@ -278,10 +276,9 @@ hh:mm:ss| 混合日期和时间值，时间戳
 
 当然，也可以使用 SQL 命令，这样也能够删除多条数据：
 
-    
-    
+```sql
     DELETE FROM `course` WHERE `id` = '2';
-    
+```
 
 ## 总结
 

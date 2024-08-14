@@ -9,40 +9,38 @@ Nuxt 项目存放样式、图片等静态资源的目录默认有两个：
 
   * public：会被作为应用程序根目录提供给用户，打包工具不会处理，访问时添加`/`即可，例如：`/logo.png`。
 
-    
-    
-    <template>
+```vue
+<template>
       <img src="/logo.png" />
     </template>
-    
+```
 
   * assets：打包工具会处理，访问时以`~`开头，例如：`~/assets/logo.png`。
 
-    
-    
-    <template>
+```vue
+<template>
       <img src="~/assets/logo.png" />
     </template>
-    
+```
 
 > 除了`~`，Nuxt3 中还有一些默认别名：
->  
->  
->     {
->       "~~": "/<rootDir>",
->       "@@": "/<rootDir>",
->       "~": "/<rootDir>",
->       "@": "/<rootDir>",
->       "assets": "/<rootDir>/assets",
->       "public": "/<rootDir>/public"
->     }
->  
+
+``` json
+{
+     "~~": "/<rootDir>",
+     "@@": "/<rootDir>",
+     "~": "/<rootDir>",
+     "@": "/<rootDir>",
+     "assets": "/<rootDir>/assets",
+     "public": "/<rootDir>/public"
+   }
+```
+
 
 下面我们引入一个作者头像图片试一下，layouts/default.vue：
 
-    
-    
-    <template>
+```vue
+<template>
       <div>
         <nav>
           导航栏
@@ -58,7 +56,7 @@ Nuxt 项目存放样式、图片等静态资源的目录默认有两个：
       border-radius: 50%;
     }
     </style>
-    
+```
 
 可以正常使用!
 
@@ -74,35 +72,32 @@ Nuxt 项目存放样式、图片等静态资源的目录默认有两个：
 
 ### nuxt.config.ts 配置全局样式:
 
-    
-    
-    export default defineNuxtConfig({
+```javascript
+export default defineNuxtConfig({
       css: [
         'assets/global.css'
       ]
     })
-    
+```
 
 创建 assets/global.css：
 
-    
-    
-    a {
+```css
+a {
       text-decoration: none;
       color: #3370ff;
     }
-    
+```
 
 ### app.vue 中引入全局样式
 
 也可以在 app.vue 中引入样式：
 
-    
-    
-    <script>
+```vue
+<script>
     import "~/assets/global.css";
     </script>
-    
+```
 
 效果如下：
 
@@ -112,33 +107,28 @@ Nuxt 项目存放样式、图片等静态资源的目录默认有两个：
 
 如果要使用 Sass，安装 `sass` 即可：
 
-    
-    
-    yarn add sass -D 
-    
+`yarn add sass -D `
 
 对应的，重命名 global.css 为 global.scss，并添加一个变量测试一下：
 
-    
-    
-    $linkColor: #3370ff;
+```scss
+$linkColor: #3370ff;
     
     a {
       text-decoration: none;
       color: $linkColor;
     }
-    
+```
 
 修改配置文件，nuxt.config.ts：
 
-    
-    
-    export default defineNuxtConfig({
+```typescript
+export default defineNuxtConfig({
       css: [
         'assets/global.scss'
       ]
     })
-    
+```
 
 效果如初~
 
@@ -150,9 +140,8 @@ Nuxt 项目存放样式、图片等静态资源的目录默认有两个：
 
 首先创建 assets/_variables.scss，移动变量到它里面。然后添加一个 vite 配置，nuxt.config.ts
 
-    
-    
-    // https://nuxt.com/docs/api/configuration/nuxt-config
+```typescript
+// https://nuxt.com/docs/api/configuration/nuxt-config
     export default defineNuxtConfig({
       css: ["assets/global.scss"],
       vite: {
@@ -165,18 +154,17 @@ Nuxt 项目存放样式、图片等静态资源的目录默认有两个：
         },
       },
     });
-    
+```
 
-下面就可以在组件页面中使用这些变量了，[id].vue：
+下面就可以在组件页面中使用这些变量了，`[id].vue`：
 
-    
-    
-    <style scoped lang="scss">
+```vue
+<style scoped lang="scss">
     p {
       color: $linkColor
     }
     </style>
-    
+```
 
 效果如下：
 
@@ -191,21 +179,17 @@ Tailwindcss，因此这里给大家演示一下如何整合。
 
 安装 @nuxtjs/tailwindcss 模块：
 
-    
-    
-    yarn add --dev @nuxtjs/tailwindcss
-    
+`yarn add --dev @nuxtjs/tailwindcss`
 
 添加配置项，nuxt.config.ts：
 
-    
-    
-    {
+```typescript
+{
       modules: [
         '@nuxtjs/tailwindcss'
       ]
     }
-    
+```
 
 ### 配置全局样式和变量
 
@@ -213,9 +197,8 @@ Tailwind 官方强烈建议单独使用 postcss，不要和其他 Sass 等预处
 
 添加全局样式文件，请注意路径和文件名必须是：`assets/css/tailwind.css`
 
-    
-    
-    @import '_variables.css';
+```css
+@import '_variables.css';
     
     @tailwind base;
     @tailwind components;
@@ -225,38 +208,35 @@ Tailwind 官方强烈建议单独使用 postcss，不要和其他 Sass 等预处
       text-decoration: none;
       color: var(--link-color);
     }
-    
+```
 
 _variables.css 就是前面的 _variables. scss，同时修改内容为：
 
-    
-    
-    :root {
+```css
+:root {
       --link-color: #3370ff;
     }
-    
+```
 
 最后，修改组件中使用方式，[id].vue:
 
-    
-    
-    <style scoped>
+```vue
+<style scoped>
     p {
       color: var(--link-color)
     }
     </style>
-    
+```
 
 除了头像部分，这是因为 tailwind 默认样式导致，我们添加一些 class 修正一下：
 
-    
-    
-    <img
+```html
+<img
         class="w-[50px] border-[1px] border-slate-300 rounded-full inline-block"
         src="~/assets/avatar.png"
         alt="avatar"
     />
-    
+```
 
 效果基本如初~
 
@@ -266,9 +246,8 @@ _variables.css 就是前面的 _variables. scss，同时修改内容为：
 
 最后我们调整导航样式，让它看起来更像个导航~ default.vue：
 
-    
-    
-    <nav
+```html
+<nav
       class="border-b border-slate-200 px-5 py-2 flex items-center justify-between"
     >
       <h1 class="text-2xl font-bold">Nuxt3 in Action</h1>
@@ -278,7 +257,7 @@ _variables.css 就是前面的 _variables. scss，同时修改内容为：
         alt="avatar"
       />
     </nav>
-    
+```
 
 效果还不错：
 

@@ -26,35 +26,32 @@ Nuxt3 是全栈框架，代码可能运行在客户端和服务端，因此错�
 
 首先看一下 Vue 层面的处理方法：`onErrorCaptured`，这是 Vue 实例提供的全局配置选项，可以这样配置：
 
-    
-    
+```typescript
     app.config.errorHandler = (error, context) => {}
-    
+```
 
 现在的问题是如何获得 Vue 实例，方法是通过 Nuxt 提供的插件机制获取：
 
-    
-    
+```typescript
     export default defineNuxtPlugin((nuxtApp) => {
       // 通过 nuxtApp.vueApp 获取 Vue 实例
       nuxtApp.vueApp.config.errorHandler = (error, context) => {
         // ...
       }
     })
-    
+```
 
 > 关于 Nuxt 插件机制，我们在后续章节会详细介绍
 
 下面我们在个人博客范例中添加错误捕获功能，创建 ~/plugins/error.ts：
 
-    
-    
+```typescript
     export default defineNuxtPlugin((nuxtApp) => {
       nuxtApp.vueApp.config.errorHandler = (..._args) => {
         console.log('vue error handler')
       }
     })
-    
+```
 
 测试效果：这里访问了一个不存在的变量：
 
@@ -72,8 +69,7 @@ Nuxt3 是全栈框架，代码可能运行在客户端和服务端，因此错�
 
 添加两个钩子`app:error`, `vue:error`，plugins/error.ts。
 
-    
-    
+```typescript
     export default defineNuxtPlugin((nuxtApp) => {
       nuxtApp.hook('app:error', (..._args) => {
         console.log('app:error')
@@ -82,7 +78,7 @@ Nuxt3 是全栈框架，代码可能运行在客户端和服务端，因此错�
         console.log('app:error')
       })
     })
-    
+```
 
 观察错误输出：三个错误处理都触发了，而且有自下而上的先后顺序 errorHandler -> vue:error -> app:error。
 
@@ -101,8 +97,7 @@ Nuxt3 是全栈框架，代码可能运行在客户端和服务端，因此错�
 
 大家可以使用 `createError` 方法抛出异常，然后在客户端处理，就像下面这样：
 
-    
-    
+```typescript
     export default defineEventHandler((event) => {
       // 参数类型有问题就抛出异常
       const id = parseInt(event.context.params.id) as number
@@ -114,14 +109,13 @@ Nuxt3 是全栈框架，代码可能运行在客户端和服务端，因此错�
       }
       return 'ok'
     })
-    
+```
 
 ### 范例：文章详情接口错误处理
 
 下面我们修改文章详情接口，如果用户传递的 id 没有对应的文章，则抛出异常，server/detail/[id].ts:
 
-    
-    
+```typescript
     export default defineEventHandler(async (event) => {
       // ...省略部分代码
       // 判断 fullPath 是否可以访问
@@ -136,12 +130,11 @@ Nuxt3 是全栈框架，代码可能运行在客户端和服务端，因此错�
         });
       }
     });
-    
+```
 
 相应的，客户端要处理该异常，我们看一下 [id].vue 中如何处理：可以获取`useAsyncData`返回的`error`并显示：
 
-    
-    
+```vue
     <template>
       <div class="p-5">
         <!-- 显示错误信息 -->
@@ -160,7 +153,7 @@ Nuxt3 是全栈框架，代码可能运行在客户端和服务端，因此错�
     // 获取服务端返回的错误信息
     const errorMsg = computed(() => (error.value as NuxtError).statusMessage)
     </script>
-    
+```
 
 效果如下：
 
@@ -175,8 +168,7 @@ error.vue** ，该页面会接收一个包含错误信息的 error 属性。
 
 创建 ~/error.vue：
 
-    
-    
+```vue
     <template>
       <div class="pt-10">
         <h1 class="text-2xl text-center mb-2">
@@ -200,7 +192,7 @@ error.vue** ，该页面会接收一个包含错误信息的 error 属性。
     const retry = () => window.location.href = props.error!.url;
     const handleError = () => clearError({ redirect: "/" });
     </script>
-    
+```
 
 现在再看一下错误页面效果，是不是好多了？
 
@@ -210,18 +202,16 @@ error.vue** ，该页面会接收一个包含错误信息的 error 属性。
 
 Nuxt 提供了 showError 方法显示全屏错误，传递一个字符串或者错误对象即可。
 
-    
-    
+```typescript
     showError('文件不存在')
     showError(new Error('文件不存在'))
-    
+```
 
 ### 范例：详情页报错使用自定义错误页
 
 前面详情页报错是在当前页显示错误信息，如果想要全屏显示，可以调用 showError 方法，[id].vue:
 
-    
-    
+```typescript
     const { data, pending, error } = await useAsyncData("post", fetchPost);
     const errorMsg = computed(() => (error.value as NuxtError).statusMessage)
     // 显示全屏错误页
@@ -231,7 +221,7 @@ Nuxt 提供了 showError 方法显示全屏错误，传递一个字符串或者�
         showError(errorMsg.value as string);
       }
     });
-    
+```
 
 ## 组件级错误处理
 
@@ -242,8 +232,7 @@ Nuxt 还有一个组件级的错误处理组件 ， **专门用于处理客户�
 我们可以把` <NuxtErrorBoundary>` 作为容器组件将内容包起来，其默认插槽中发生的错误会被捕获，避免向上冒泡，并且渲染 error
 插槽。我们可以像下面这样使用 ：
 
-    
-    
+```vue
     <template>
       <NuxtErrorBoundary @error="errorLogger">
         <!-- 默认插槽放置要渲染的内容 -->
@@ -257,14 +246,13 @@ Nuxt 还有一个组件级的错误处理组件 ， **专门用于处理客户�
         </template>
       </NuxtErrorBoundary>
     </template>
-    
+```
 
 ### 范例：在组件内处理错误
 
 创建页面 pages/error-handle.vue:
 
-    
-    
+```vue
     <template>
       <NuxtErrorBoundary>
         <!-- 默认插槽显示正常内容 -->
@@ -277,12 +265,11 @@ Nuxt 还有一个组件级的错误处理组件 ， **专门用于处理客户�
         </template>
       </NuxtErrorBoundary>
     </template>
-    
+```
 
 创建 ThrowError 抛出错误，components/ThrowError.vue:
 
-    
-    
+```vue
     <template>
       <div>
         <NButton @click="throwError">你点我试试</NButton>
@@ -293,7 +280,7 @@ Nuxt 还有一个组件级的错误处理组件 ， **专门用于处理客户�
       throw new Error("来自 ThrowError 组件的异常");
     };
     </script>
-    
+```
 
 ## 总结
 

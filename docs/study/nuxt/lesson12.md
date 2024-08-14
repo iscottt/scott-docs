@@ -24,8 +24,7 @@ Nuxt 其实有一套默认配置，能够应付大部分需要。但是当我们
 nuxt.config.ts，它默认导出 defineNuxtConfig() 的执行结果，再和默认 nuxt
 配置合并并最终生效，例如我们前面增加的模块配置：
 
-    
-    
+``` typescript
     export default defineNuxtConfig({
       modules: [
         "@nuxtjs/tailwindcss",
@@ -33,7 +32,7 @@ nuxt.config.ts，它默认导出 defineNuxtConfig() 的执行结果，再和默�
         "@huntersofbook/naive-ui-nuxt",
       ],
     });
-    
+```
 
 我们会在后面演示一些开发中比较常见的配置方法。
 
@@ -42,8 +41,7 @@ nuxt.config.ts，它默认导出 defineNuxtConfig() 的执行结果，再和默�
 如果需要配置一些项目需要的公共变量，可以在项目根目录创建
 app.config.ts，这些变量是响应式的，不仅在运行时可以访问，还可以改变。例如下面的配置范例：
 
-    
-    
+```typescript
     export default defineAppConfig({
       title: 'Hello Nuxt',
       theme: {
@@ -53,23 +51,21 @@ app.config.ts，这些变量是响应式的，不仅在运行时可以访问，�
         }
       }
     })
-    
+```
 
 > 实际上，nuxt.config.ts 中有个 appConfig 选项可以起到相同的作用。
 
 访问 app.config.ts 中的变量：
 
-    
-    
+```typescript
      const appConfig = useAppConfig()
-    
+```
 
 #### 范例：根据配置项设置黑暗模式
 
 创建 ~/pages/config.vue，根据 app.config.ts 中的配置控制黑暗模式和标题。
 
-    
-    
+```vue
     <template>
       <div :class="{ dark: appConfig.theme.dark }">
         <p
@@ -89,15 +85,15 @@ app.config.ts，这些变量是响应式的，不仅在运行时可以访问，�
     <script setup lang="ts">
     const appConfig = useAppConfig();
     </script>
-    
+```
 
 > 需要额外开启 tailwind 黑暗模式，tailwind.config.js：
->  
->  
->     module.exports = {
->       darkMode: 'class',
->     }
->  
+
+```javascript
+     module.exports = {
+       darkMode: 'class',
+     }
+```
 
 效果如下：
 
@@ -116,15 +112,10 @@ Nuxt 只认 `nuxt.config.ts`，因此一些大家熟悉的独立配置文件会�
 当然，还有一些配置文件依然可以使用：
 
   * tsconfig.json；
-
   * .eslintrc.js；
-
   * .prettieerrc.json；
-
   * .stylelintrc.json；
-
   * tailwind.config.js；
-
   * vitest.config.js。
 
 ## 开发常用配置
@@ -137,24 +128,22 @@ Nuxt 支持 Vite、Webpack 两种打包工具，默认使用 Vite。我们可以
 
 下面配置设置打包工具为 Webpack：
 
-    
-    
+```typescript
     export default defineNuxtConfig({
       builder: "webpack"
     });
-    
+```
 
 > 注意：需要安装 @nuxt/webpack-builder。
 
 相应的，如果要修改对应打包工具配置，可以使用 Vite 或 Webpack 选项：
 
-    
-    
+```typescript
     export default defineNuxtConfig({
       vite: {},
       webpack: {}
     });
-    
+```
 
 ### 配置渲染模式
 
@@ -162,36 +151,33 @@ Nuxt 默认渲染模式是 SSR 模式。
 
 可以通过设置 `ssr: false` 修改渲染模式为 SPA，nuxt.config.ts：
 
-    
-    
+```typescript
     export default defineNuxtConfig({
       ssr: false,
     })
-    
+```
 
 可以通过设置 `nitro.presets` 选项修改渲染模式为非 node 模式，nuxt.config.ts：
 
-    
-    
+```typescript
     export default defineNuxtConfig({
       nitro: {
         preset: 'vercel'
       },
     })
-    
+```
 
 ### 端口号
 
 配置了端口号为 8080，避免和其他本地服务端口冲突，package.json:
 
-    
-    
+```typescript
     {
       "scripts": {
         "dev": "nuxt dev --port=8080"
       }
     }
-    
+```
 
 ### 环境变量
 
@@ -201,8 +187,7 @@ key 存储在 `runtimeConfig.public` 字段中。跟 `appConfig` 比起来，它
 
 添加 `runtimeConfig`，nuxt.config.ts：
 
-    
-    
+```typescript
     export default defineNuxtConfig({
       runtimeConfig: {
         // 只能用于服务端的 keys
@@ -213,12 +198,11 @@ key 存储在 `runtimeConfig.public` 字段中。跟 `appConfig` 比起来，它
         }
       }
     })
-    
+```
 
 访问`runtimeConfig`，修改 config.vue：
 
-    
-    
+```vue
     <template>
       <div :class="{ dark: appConfig.theme.dark }">
         <!-- ... -->
@@ -241,7 +225,7 @@ key 存储在 `runtimeConfig.public` 字段中。跟 `appConfig` 比起来，它
       console.log('API secret:', runtimeConfig.apiSecret)
     }
     </script>
-    
+```
 
 服务端效果如下：apiBase 和 apiSecret 都可以访问：
 
@@ -255,11 +239,10 @@ key 存储在 `runtimeConfig.public` 字段中。跟 `appConfig` 比起来，它
 
 结合 dotenv 可以配置环境变量并覆盖 runtimeConfig 中的对应项，创建 .env 文件:
 
-    
-    
+```yml
     NUXT_API_SECRET=api_secret_token
     NUXT_PUBLIC_API_BASE=https://nuxt3.cn
-    
+```
 
 > 注意 `NUXT`，`NUXT_PUBLIC` 前缀，以及驼峰转换对应关系。
 
@@ -273,14 +256,13 @@ key 存储在 `runtimeConfig.public` 字段中。跟 `appConfig` 比起来，它
 
 该选项主要设置自动导入，例如前面的 store 目录就可以通过配置该选项，避免用户每次使用时手动导入。nuxt.config.ts：
 
-    
-    
+```typescript
     export default defineNuxtConfig({
       imports: {
         dirs: ['store']
       },
     }
-    
+```
 
 现在 [id].vue 和 login.vue 中都不需要手动导入 `useUser` 了！
 
@@ -296,8 +278,7 @@ key 存储在 `runtimeConfig.public` 字段中。跟 `appConfig` 比起来，它
 
 通过 `app.head` 可以全局配置网站页头信息：
 
-    
-    
+```typescript
     export default defineNuxtConfig({
       app: {
         head: {
@@ -314,14 +295,13 @@ key 存储在 `runtimeConfig.public` 字段中。跟 `appConfig` 比起来，它
         }
       }
     })
-    
+```
 
 #### 范例：设置博客范例页头信息
 
 我们在 nuxt.config.ts 中配置整站的描述和关键字：
 
-    
-    
+```typescript
     export default defineNuxtConfig({
       app: {
         head: {
@@ -333,7 +313,7 @@ key 存储在 `runtimeConfig.public` 字段中。跟 `appConfig` 比起来，它
         },
       }
     })
-    
+```
 
 效果如下：
 
@@ -345,8 +325,7 @@ key 存储在 `runtimeConfig.public` 字段中。跟 `appConfig` 比起来，它
 
 Nuxt 提供了一个 useHead() 可以在组件内修改 meta 信息：
 
-    
-    
+```vue
     <script setup lang="ts">
     useHead({
       title: 'My App',
@@ -359,18 +338,17 @@ Nuxt 提供了一个 useHead() 可以在组件内修改 meta 信息：
       script: [ { children: 'console.log('Hello world')' } ]
     })
     </script>
-    
+```
 
 #### 范例：设置各子页面标题
 
 设置首页标题，index.vue
 
-    
-    
+```typescript
     useHead({
       title: '文章列表'
     })
-    
+```
 
 这样虽然生效，但之前设置的网站名称被覆盖了：
 
@@ -378,8 +356,7 @@ Nuxt 提供了一个 useHead() 可以在组件内修改 meta 信息：
 
 可以设置标题模板解决此问题，app.vue：
 
-    
-    
+```vue
     <script setup lang="ts">
     useHead({
       titleTemplate: (s) => {
@@ -387,7 +364,7 @@ Nuxt 提供了一个 useHead() 可以在组件内修改 meta 信息：
       },
     });
     </script>
-    
+```
 
 问题解决了：
 
@@ -395,14 +372,13 @@ Nuxt 提供了一个 useHead() 可以在组件内修改 meta 信息：
 
 再去详情页设置页面标题，[id].vue：
 
-    
-    
+```typescript
     const route = useRoute();
     // 设置为当前文章id
     useHead({
       title: route.params.id as string
     });
-    
+```
 
 效果如下：
 
@@ -411,13 +387,13 @@ Nuxt 提供了一个 useHead() 可以在组件内修改 meta 信息：
 当然也可以设置为文章标题：
 
     
-    
+```typescript
     const { data, pending, error } = await useAsyncData("post", fetchPost);
     // 设置为文章结果
     useHead({
       title: data.value?.title
     });
-    
+```
 
 效果如下：
 
@@ -429,7 +405,8 @@ Nuxt 还提供了多种组件可以在模板中设置具体页面页头信息：
 `<Meta>`, `<Link>`, `<Body>`, `<Html>` , `<Head>`，像下面这样使用：
 
     
-    
+
+```vue
     <script setup>
     const title = ref('Hello World')
     </script>
@@ -442,12 +419,13 @@ Nuxt 还提供了多种组件可以在模板中设置具体页面页头信息：
         </Head>
       </div>
     </template>
-    
+```
 
 这更符合大家直觉了！在 [id].vue 中试一下：效果如初~
 
     
-    
+
+```vue
     <template>
       <div class="p-5">
         <Head>
@@ -456,12 +434,11 @@ Nuxt 还提供了多种组件可以在模板中设置具体页面页头信息：
         <!-- ... -->
       </div>
     </template>
-    
+```
 
 ## 总结
 
-到这里，开发中常见选项设置就跟大家讨论完毕了。我们不太可能在一节中覆盖全部内容，但是我们演示这些都是最常见的配置需求，可以解决大家大部分问题。更多细节还需要大家多多阅读[文档](https://nuxt.com/docs/api/configuration/nuxt-
-config)。
+到这里，开发中常见选项设置就跟大家讨论完毕了。我们不太可能在一节中覆盖全部内容，但是我们演示这些都是最常见的配置需求，可以解决大家大部分问题。更多细节还需要大家多多阅读[文档](https://nuxt.com/docs/api/configuration/nuxt-config)。
 
 ## 下次预告
 

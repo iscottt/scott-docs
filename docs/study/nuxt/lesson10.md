@@ -18,18 +18,16 @@ Nuxt3 提供了 `useState()`，用于创建响应式的且服务端友好的跨�
 
 可以看到 `useState()`有两个重载，一个接收提供初始值的工厂函数，另一个多了唯一的 key 用于缓存数据，而返回值是一个 Ref 类型。
 
-    
-    
+```typescript
     useState<T>(init?: () => T | Ref<T>): Ref<T>
     useState<T>(key: string, init?: () => T | Ref<T>): Ref<T>
-    
+```
 
 ### useState 基本用法
 
 我们在组件中用 useState() 声明一个状态，counter.vue。
 
-    
-    
+```vue
     <template>
       <div class="p-4">
         Counter: {{ counter }} 
@@ -53,7 +51,7 @@ Nuxt3 提供了 `useState()`，用于创建响应式的且服务端友好的跨�
     <script setup lang="ts">
     const counter = useState("counter", () => Math.round(Math.random() * 1000));
     </script>
-    
+```
 
 ### useState() 和 ref() 的选择
 
@@ -65,8 +63,7 @@ Nuxt3 提供了 `useState()`，用于创建响应式的且服务端友好的跨�
 
 下面范例演示了这一点。添加一个类似的 counter，但是用 `ref()` 声明，counter.vue。
 
-    
-    
+```vue
     <template>
       <div class="p-4">
         Counter: {{ counter }} CounterRef: {{ counterRef }}
@@ -93,7 +90,7 @@ Nuxt3 提供了 `useState()`，用于创建响应式的且服务端友好的跨�
     const counterRef = ref(Math.round(Math.random() * 1000));
     const counter = useState("counter", () => Math.round(Math.random() * 1000));
     </script>
-    
+```
 
 效果如下：
 
@@ -111,17 +108,15 @@ useState() 可以保证一致性，这是其服务端友好性的一个表现。
 可以在 composables 目录中创建一个
 composable，并在里面导出一个函数，该函数由`useState()`返回全局状态，例如，composables/counter.ts：
 
-    
-    
+```typescript
     export const useCounter = () => useState('count', () => 1)
-    
+```
 
 现在，在所有组件内都可以获取该状态。
 
 创建一个 components/Counter.vue:
 
-    
-    
+```vue
     <template>
       <div class="py-4">
         Count: {{ count }} Count2: {{ count2 }}
@@ -150,12 +145,11 @@ composable，并在里面导出一个函数，该函数由`useState()`返回全�
     // 局部状态
     const count2 = ref(1);
     </script>
-    
+```
 
 在 page/counter.vue 里引入 Counter：
 
-    
-    
+```vue
     <template>
       <div class="p-4">
         Count: {{ count }} Counter: {{ counter }} CounterRef: {{ counterRef }}
@@ -188,7 +182,7 @@ composable，并在里面导出一个函数，该函数由`useState()`返回全�
     // 全局状态
     const count = useCounter();
     </script>
-    
+```
 
 效果如下：可以观察 count 同步变化情况。
 
@@ -200,15 +194,13 @@ composable，并在里面导出一个函数，该函数由`useState()`返回全�
 
 首先创建这个全局登录状态，创建 composables/user.ts：
 
-    
-    
+```typescript
     export const useLogin = () => useState(() => false)
-    
+```
 
 给详情页添加一个留言框，并在提交留言时判断登录态，[id].vue：
 
-    
-    
+```vue
     <template>
       <div class="p-5">
         <div v-if="pending">加载中...</div>
@@ -243,12 +235,11 @@ composable，并在里面导出一个函数，该函数由`useState()`返回全�
       }
     }
     </script>
-    
+```
 
 创建登录页，登录成功设置登录态，login.vue：
 
-    
-    
+```vue
     <template>
       <div>
         <NButton @click="onLogin">登录</NButton>
@@ -265,7 +256,7 @@ composable，并在里面导出一个函数，该函数由`useState()`返回全�
       router.push(callback)
     }
     </script>
-    
+```
 
 效果如下：
 
@@ -277,15 +268,13 @@ composable，并在里面导出一个函数，该函数由`useState()`返回全�
 
 我们可以使用 `@pinia/nuxt` 模块简化整合难度，首先安装依赖：
 
-    
-    
+``` bash
     yarn add @pinia/nuxt
-    
+```
 
 添加配置文件，nuxt.config.ts：
 
-    
-    
+```typescript
     export default defineNuxtConfig({
       modules: [
         // 引入 Pinia
@@ -301,7 +290,7 @@ composable，并在里面导出一个函数，该函数由`useState()`返回全�
         ]
       ],
     });
-    
+```
 
 下面我们重构博客案例，使用 Pinia 实现登录态需求，需要修改如下文件：
 
@@ -315,8 +304,7 @@ composable，并在里面导出一个函数，该函数由`useState()`返回全�
 
 创建 store/counter.ts、store/user.ts：使用 defineStore() 定义状态。
 
-    
-    
+```typescript
     export const useCounter = defineStore("count", {
       state: () => ({
         value: 1
@@ -330,28 +318,26 @@ composable，并在里面导出一个函数，该函数由`useState()`返回全�
         isLogin: false
       })
     });
-    
+```
 
 修改 [id].vue，login.vue：获取登录状态。
 
-    
-    
+```typescript
     import { useUser } from '~/store/user';
     // 获取状态，转换为 Ref，其他代码无需改变
     const store = useUser();
     const { isLogin } = storeToRefs(store)
-    
+```
 
 修改 counter.vue，Counter.vue：
 
-    
-    
+```typescript
     import { useCounter } from '~/store/counter';
     
     // 全局状态
     const store = useCounter();
     const { value: count } = storeToRefs(store);
-    
+```
 
 ## 总结
 

@@ -34,8 +34,7 @@
 
 更新两个repository，columnRepository.ts
 
-    
-    
+```typescript
     export async function getColumns({ page, size }): Promise<{ columns: Column[] | null; total: number }> {
       const [columns, total] = await Promise.all([
         prisma.column.findMany({
@@ -47,12 +46,11 @@
       ])
       return { columns, total }
     }
-    
+```
 
 courseRepository.ts
 
-    
-    
+```typescript
     export async function getCourses({ page, size }): Promise<{ courses: Course[] | null; total: number }> {
       const [courses, total] = await Promise.all([
         prisma.course.findMany({
@@ -64,12 +62,11 @@ courseRepository.ts
       ])
       return { courses, total }
     }
-    
+```
 
 分别实现 course 和 column 接口，server/api/course.ts
 
-    
-    
+```typescript
     import { getCourses } from '../database/repositories/courseRepository'
     
     export default defineEventHandler(async (e) => {
@@ -87,12 +84,11 @@ courseRepository.ts
         return sendError(e, createError('获取数据失败'))
       }
     })
-    
+```
 
 server/api/column.ts
 
-    
-    
+```typescript
     import { getColumns } from '../database/repositories/columnRepository'
     
     export default defineEventHandler(async (e) => {
@@ -110,7 +106,7 @@ server/api/column.ts
         return sendError(e, createError('获取数据失败'))
       }
     })
-    
+```
 
 ## 前端页面实现
 
@@ -136,8 +132,7 @@ server/api/column.ts
 
 [type].vue
 
-    
-    
+```vue
     <!-- 课程列表页 -->
     <script setup lang="ts">
     import type { IResult } from '~/types/IResult'
@@ -188,7 +183,7 @@ server/api/column.ts
         </div>
       </div>
     </template>
-    
+```
 
 效果如下：
 

@@ -16,9 +16,7 @@ SSR，这个执行时刻既可能在服务端（首屏），也可能在客户�
 路由中间件根据影响范围和使用方式的不同，又分为三种：
 
   * 匿名中间件：只影响一个页面，不可复用；
-
   * 具名中间件：指定若干影响页面，可复用、组合；
-
   * 全局中间件：影响所有页面，文件名需要加后缀 global。
 
 ### 中间件使用
@@ -26,40 +24,40 @@ SSR，这个执行时刻既可能在服务端（首屏），也可能在客户�
 匿名中间件用法，mid.vue：
 
     
-    
+```typescript
     definePageMeta({
       middleware(to, from) {
         console.log('匿名中间件，具体页面执行');
       }
     })
-    
+```
 
 具名中间件用法，mid.vue：
 
     
-    
+```typescript
     definePageMeta({
       middleware: ['amid', 'bmid']
     })
-    
+```
 
 定义具名中间件，amid.ts：
 
     
-    
+```typescript
     export default defineNuxtRouteMiddleware((to, from) => {
       console.log('具名中间件a，影响指定页面：' + to.path); 
     })
-    
+```
 
 全局中间件，创建 cmid.global.ts：
 
     
-    
+```typescript
     export default defineNuxtRouteMiddleware((to, from) => {
       console.log('全局中间件c，影响所有页面');
     })
-    
+```
 
 效果如下：
 
@@ -72,15 +70,14 @@ SSR，这个执行时刻既可能在服务端（首屏），也可能在客户�
   * abortNavigation(error)：跳过，留在 from；
   * navigateTo(route)：指定跳转目标。
 
-    
-    
+```typescript
     export default defineNuxtRouteMiddleware((to, from) => {
       if (to.params.id === '1') {
         return abortNavigation()
       }
       return navigateTo('/')
     })
-    
+```
 
 ### 范例：路由守卫
 
@@ -88,8 +85,7 @@ SSR，这个执行时刻既可能在服务端（首屏），也可能在客户�
 
 首先创建 middleware/auth.ts：
 
-    
-    
+```typescript
     export default defineNuxtRouteMiddleware((to, from) => {
       const store = useUser();
       // 未登录，导航到登录页
@@ -97,18 +93,17 @@ SSR，这个执行时刻既可能在服务端（首屏），也可能在客户�
         return navigateTo("/login?callback=" + to.path)
       }
     })
-    
+```
 
 页面中注册一下中间件，[id].vue：
 
-    
-    
+```typescript
     definePageMeta({
       middleware: ['auth']
     })
     
     // 现在留言不需要在页内判断登录态
-    
+```
 
 ## 服务端中间件
 
@@ -118,17 +113,15 @@ SSR，这个执行时刻既可能在服务端（首屏），也可能在客户�
 
 Nuxt 会自动读取 ~/server/middleware 中的文件作为服务端中间件，例如下面请求日志中间件：
 
-    
-    
+```typescript
     export default defineEventHandler((event) => {
       console.log('New request: ' + event.node.req.url)
     })
-    
+```
 
 中间件还可以执行审查、扩展上下文或抛出错误：
 
-    
-    
+```typescript
     export default defineEventHandler((event) => {
       // 扩展上下文对象
       event.context.userInfo = { user: ‘cunzhang’ }
@@ -142,7 +135,7 @@ Nuxt 会自动读取 ~/server/middleware 中的文件作为服务端中间件，
         }))
       }
     })
-    
+```
 
 ### 范例：保护指定服务端接口
 
@@ -150,8 +143,7 @@ Nuxt 会自动读取 ~/server/middleware 中的文件作为服务端中间件，
 
 首先实现一个 server 中间件，检查指定接口请求中是否包含 token，~/server/middleware/auth.ts：
 
-    
-    
+```typescript
     import { H3Event } from "h3";
     
     export default defineEventHandler((event) => {
@@ -185,12 +177,12 @@ Nuxt 会自动读取 ~/server/middleware 中的文件作为服务端中间件，
       }
       return true;
     }
-    
+```
 
 对应的，客户端详情页 `[id].vue` 不再需要中间件保护，同时需要在请求时携带令牌，并且处理可能的响应错误：
 
     
-    
+```typescript
     // definePageMeta({
     //   middleware: ["auth"],
     // });
@@ -209,7 +201,7 @@ Nuxt 会自动读取 ~/server/middleware 中的文件作为服务端中间件，
           }
         },
       });
-    
+```
 
 效果如下：
 
