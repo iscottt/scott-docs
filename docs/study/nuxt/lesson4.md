@@ -30,10 +30,9 @@
 
 打开命令行终端，输入下面命令创建一个`Nuxt3`项目：
 
-    
-    
+```bash
     npx nuxi init nuxt3-app
-    
+```
 
 > 踩坑指南：如果因为众所周知的原因出现 443 错误，请参考本文最后一部分的操作指南。
 
@@ -41,19 +40,17 @@
 
 可以使用喜欢的包管理工具安装和管理依赖，`npm`/`yarn`/`pnpm`均可：
 
-    
-    
+```bash
     yarn install
-    
+```
 
 ### 启动项目
 
 使用 `yarn dev`以开发模式启动 nuxt:
 
-    
-    
+```bash
     yarn dev
-    
+```
 
 ### 预览项目
 
@@ -71,20 +68,18 @@ router`依赖，同时根据你创建的文件名称自动帮你配置一个路�
 
 下面我们来体验一下这个特性，我们创建`pages/index.vue`，并添加如下内容：
 
-    
-    
+```vue
     <template>
       <div>Index Page</div>
     </template>
-    
+```
 
 想要生效还要对 app.vue 稍作修改：
 
   * 移除欢迎页面`<NuxtWelcome />`；
   * 添加一个路由出口`<NuxtPage />`：
 
-    
-    
+```vue
     <template>
       <div>
         <!-- 移除欢迎页面 -->
@@ -94,9 +89,9 @@ router`依赖，同时根据你创建的文件名称自动帮你配置一个路�
         <NuxtPage></NuxtPage>
       </div>
     </template>
-    
+```
 
-下面我们可以输入 <http://localhost:3000> 看一下效果：
+下面我们可以输入 `http://localhost:3000` 看一下效果：
 
 ![](img\4\1.png)
 
@@ -104,14 +99,13 @@ router`依赖，同时根据你创建的文件名称自动帮你配置一个路�
 
 可以像下面这样，在`index.vue`中添加一个`NuxtLink`：
 
-    
-    
+```vue
     <template>
       <!-- ... -->
       <!--跳转链接-->
       <NuxtLink to="/detail">Detail Page</NuxtLink>
     </template>
-    
+```
 
 现在可以自由的跳转了！
 
@@ -160,14 +154,13 @@ router`依赖，同时根据你创建的文件名称自动帮你配置一个路�
 
 由于众所周知的原因，有些小伙伴可能在第一步创建项目的时候就遇到如下错误：
 
-    
-    
+```bash
     ➜  nuxt-in-action npx nuxi init nuxt3-app                               
     Nuxi 3.0.0                                                                   
      ERROR  Failed to download template from registry: request to 
      https://raw.githubusercontent.com/nuxt/starter/templates/templates/v3.json failed, 
      reason: connect ECONNREFUSED 0.0.0.0:443
-    
+```
 
 这是因为`nuxi`在创建项目时需要到`raw.githubusercontent.com`拉取项目模版，由于域名解析失败导致创建流程失败。解决方案也很简单，我们可以获取这个网址的`ip`地址，并在`/etc/hosts`中配置好，这样就能够顺利拉取项目模版，并成功创建项目。
 
