@@ -16,11 +16,11 @@
 
 下面是 Apifox 中的 login 接口设计：
 
-![](img\26\1.image)
+![](img\26\1.png)
 
-![](img\26\2.image)
+![](img\26\2.png)
 
-![](img\26\3.image)
+![](img\26\3.png)
 
 register 接口类似，不再赘述。
 
@@ -422,7 +422,7 @@ login.vue
 
 导航栏中需要显示用户信息，并提供注销登录功能。
 
-![](img\26\4.image)
+![](img\26\4.png)
 
 #### 显示用户信息
 

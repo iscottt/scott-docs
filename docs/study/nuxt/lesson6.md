@@ -60,7 +60,7 @@ Nuxt 项目存放样式、图片等静态资源的目录默认有两个：
 
 可以正常使用!
 
-![](img\6\1.image)
+![](img\6\1.png)
 
 ## 全局样式
 
@@ -101,7 +101,7 @@ a {
 
 效果如下：
 
-![](img\6\2.image)
+![](img\6\2.png)
 
 ### 使用 CSS 预处理器：Sass
 
@@ -132,7 +132,7 @@ export default defineNuxtConfig({
 
 效果如初~
 
-![](img\6\3.image)
+![](img\6\3.png)
 
 ### 全局样式导入
 
@@ -168,7 +168,7 @@ export default defineNuxtConfig({
 
 效果如下：
 
-![](img\6\4.image)
+![](img\6\4.png)
 
 ## 整合 Tailwindcss
 
@@ -240,7 +240,7 @@ _variables.css 就是前面的 _variables. scss，同时修改内容为：
 
 效果基本如初~
 
-![](img\6\5.image)
+![](img\6\5.png)
 
 ### 样式调整
 
@@ -261,7 +261,7 @@ _variables.css 就是前面的 _variables. scss，同时修改内容为：
 
 效果还不错：
 
-![](img\6\6.image)
+![](img\6\6.png)
 
 ## 下次预告
 

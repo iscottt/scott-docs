@@ -117,7 +117,7 @@ ts，单独使用不依赖 Prettier。
 
 执行测试，效果如下：
 
-![](img\19\1.image)
+![](img\19\1.png)
 
 ## 整合 UnoCSS
 
@@ -162,7 +162,7 @@ ts，单独使用不依赖 Prettier。
 
 效果如下：
 
-![](img\19\2.image)
+![](img\19\2.png)
 
 ## 使用图标
 
@@ -180,13 +180,13 @@ ts，单独使用不依赖 Prettier。
 sets.iconify.design/) 搜索图标，例如我们想要找一个 nuxt
 图标，在下面地址搜索该关键字：<https://icones.js.org/collection/all>
 
-![](img\19\3.image)
+![](img\19\3.png)
 
 ### 安装图标集
 
 我们选择 vscode-icons 图标集：
 
-![](img\19\4.image)
+![](img\19\4.png)
 
 安装该依赖：
 

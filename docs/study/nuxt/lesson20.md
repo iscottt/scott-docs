@@ -51,11 +51,11 @@ Nuxt
 
 首先去[官网](https://www.docker.com/)下载并安装 Docker Desktop，下载适合自己的版本，比如我下载的是 Mac 版：
 
-![](img\20\1.image)
+![](img\20\1.png)
 
 启动 Docker Desktop：
 
-![](img\20\2.image)
+![](img\20\2.png)
 
 ### 通过 docker-compose 安装 MySQL 和 Adminer
 
@@ -94,11 +94,11 @@ Docker 安装好之后，就可以找到合适的镜像安装所需软件，我�
 
 执行结束，效果如下：
 
-![](img\20\3.image)
+![](img\20\3.png)
 
 现在再看一下 Docker Desktop 的运行状态，MySQL 和 Adminer 顺利启动了：
 
-![](img\20\4.image)
+![](img\20\4.png)
 
 ## 使用 Adminer
 
@@ -107,13 +107,13 @@ Docker 安装好之后，就可以找到合适的镜像安装所需软件，我�
 
 这里用户名输入：root，密码输入：rootpassword（如果修改了，就输入修改过的密码），效果如下：
 
-![](img\20\5.image)
+![](img\20\5.png)
 
 > 注意如果端口不合适，可以在 docker-compose.yml 中修改 `ports`
 
 点击登录，应该能看到下面的管理界面：
 
-![](img\20\6.image)
+![](img\20\6.png)
 
 ## 总结
 

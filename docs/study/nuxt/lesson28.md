@@ -16,7 +16,7 @@
   * 内容列表；
   * 分页器。
 
-![](img\28\1.image)
+![](img\28\1.png)
 
 ## 接口实现
 
@@ -128,7 +128,7 @@ server/api/column.ts
 
 下面创建这个目录结构：
 
-![](img\28\2.image)
+![](img\28\2.png)
 
 [type].vue
 
@@ -187,7 +187,7 @@ server/api/column.ts
 
 效果如下：
 
-![](img\28\3.image)
+![](img\28\3.png)
 
 ## 下次预告
 

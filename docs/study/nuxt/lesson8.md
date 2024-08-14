@@ -45,7 +45,7 @@ const { message } = await $fetch('/api/hello')
 
 测试效果如下：
 
-![](img\8\1.image)
+![](img\8\1.png)
 
 ## 范例：获取博客列表
 
@@ -123,7 +123,7 @@ export default defineEventHandler((event) => {
 
 效果如下：
 
-![](img\8\2.image)
+![](img\8\2.png)
 
 ## 处理请求参数
 
@@ -191,7 +191,7 @@ export default defineEventHandler((event) => {
 
 效果如下：
 
-![](img\8\3.image)
+![](img\8\3.png)
 
 ### 获取请求体
 

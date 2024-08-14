@@ -15,7 +15,7 @@
 **Prisma 是一个使用 TypeScript 和 Node.js 开发的 ORM (对象关系映射) 库**
 ，用于简化对数据库的访问和操作。它提供了一种高级语言来定义数据模型，并且可以生成数据库架构和数据访问代码。
 
-![](img\23\1.image)
+![](img\23\1.png)
 
 ## 快速体验 Prisma
 
@@ -67,7 +67,7 @@ User，它们代表了未来要创建的数据库表结构。server/database/sch
     npx prisma migrate dev --name init --schema server/database/schema.prisma 
 ```
 
-![image.png](img\23\2.image) ![image.png](img\23\3.image)
+![image.png](img\23\2.png) ![image.png](img\23\3.png)
 
 最后在代码中通过 client 访问数据库：
 
@@ -117,7 +117,7 @@ User，它们代表了未来要创建的数据库表结构。server/database/sch
 
 执行结果如下，此时并没有数据，所以返回空数组。
 
-![image.png](img\23\4.image)
+![image.png](img\23\4.png)
 
 我们插入一些数据进去：
 
@@ -148,7 +148,7 @@ User，它们代表了未来要创建的数据库表结构。server/database/sch
 
 查询结果如下：
 
-![](img\23\5.image)
+![](img\23\5.png)
 
 最后更新数据可以使用 `update({...})`：
 
@@ -161,7 +161,7 @@ User，它们代表了未来要创建的数据库表结构。server/database/sch
       console.log(post)
 ```
 
-![image.png](img\23\6.image)
+![image.png](img\23\6.png)
 
 ## 整合 Prisma 到 Nuxt 项目
 
@@ -189,7 +189,7 @@ controller 层，业务代码放在 service 层，最后在接口中组合。
 因此我们也模仿这种组织结构，创建一个 repositories 目录，将数据库相关操作按照表作为单元拆分，类似于 controller
 层。然后在接口中调用这些 repository 进行组合完成业务。如果大家觉得业务过于复杂，还可以继续提取出 service。
 
-![](img\23\7.image)
+![](img\23\7.png)
 
 ### 范例：编写用户登录接口
 
@@ -293,9 +293,9 @@ controller 层，业务代码放在 service 层，最后在接口中组合。
 
 测试结果非常理想！
 
-![](img\23\8.image)
+![](img\23\8.png)
 
-![](img\23\9.image)
+![](img\23\9.png)
 
 ## 总结
 

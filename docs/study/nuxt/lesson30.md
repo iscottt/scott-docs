@@ -24,11 +24,11 @@
 
 订单确认页，order-confirm.vue。
 
-![](img\30\1.image)
+![](img\30\1.png)
 
 支付页，order-pay.vue。
 
-![](img\30\2.image)
+![](img\30\2.png)
 
 ## 接口实现
 
@@ -346,9 +346,9 @@ server/api/order.post.ts
 
 完成！最终效果如下：
 
-![](img\30\3.image)
+![](img\30\3.png)
 
-![](img\30\4.image)
+![](img\30\4.png)
 
 ## 下次预告
 
