@@ -48,6 +48,17 @@ const sidebar = {
             ]
         }
     ],
+    '/themes/Somnia': [
+        {
+            text: 'Somnia使用手册',
+            items: [
+                {
+                    text: '主题介绍',
+                    link: '/themes/Somnia/guide'
+                },
+            ]
+        }
+    ],
     '/study/css': [
         {
             text: '🗳️ CSS技术揭秘与实战通关',

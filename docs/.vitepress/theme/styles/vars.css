@@ -3,6 +3,7 @@
  * -------------------------------------------------------------------------- */
 
 :root {
+  --vp-sidebar-width: 280px;
   --vt-c-green: #42b883;
   --vt-c-green-light: #42d392;
   --vt-c-green-lighter: #35eb9a;
@@ -167,6 +168,9 @@
   --vp-custom-block-tip-bg: var(--vp-c-brand-dimm);
   --vp-code-vue-bg: #282c34;
   --vp-code-vue-color: #333;
+  --vp-button-brand-bg: var(--primary-color);
+  --full-bg:#f0f2f7;
+  --white-bg:#fff
 }
 
 .dark {
@@ -176,6 +180,8 @@
   --vp-code-vue-bg: var(--vp-c-bg-alt);
   --vp-code-vue-color: #fff;
   --vp-c-bg-alt: #18181C;
+  --full-bg:#000;
+  --white-bg:#15151a
 }
 .header-anchor{
   display: none;
@@ -509,4 +515,160 @@ p {
 }
 html, body { 
 	scroll-behavior:smooth; 
+  background: var(--full-bg);
+}
+
+
+.VPNavBar[data-v-cf6e7c5e]:not(.home){
+  background-image: linear-gradient(var(--white-bg), transparent) !important;
+  background-size: 100% 85%;
+  background-repeat: no-repeat;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 -1px transparent inset, 0 1px #00000026, 0 2px var(--white-bg);
+  transition: .35s;
+}
+.VPNavBarTitle.has-sidebar .title{
+  border: none;
+}
+
+.curtain{
+  background-color: transparent !important;
+}
+.DocSearch-Button{
+  background: var(--vp-input-switch-bg-color);
+}
+.visually-hidden{
+  display: none;
+}
+.VPNavBar.has-sidebar .divider{
+  display: none;
+}
+.VPContent:not(.is-home){
+  padding-left: var(--vp-sidebar-width);
+  padding-top: var(--vp-nav-height);
+}
+.VPDoc{
+  background: var(--white-bg);
+  margin: 15px;
+  border-radius: 14px;
+  width: calc(100% - 30px) !important;
+  height: calc(100% - 30px) !important;
+  border: 1px solid rgb(224, 224, 230);
+  box-shadow: 0 15px 20px #1f2d3d1a;
+}
+.aside-container{
+  position: sticky !important;
+  padding-top: 0 !important;
+  top: calc(var(--vp-nav-height) + 10px) !important;
+}
+
+.VPNavBar:not(.home.top) .content-body{
+  background: transparent !important;
+}
+
+.VPNavBar:not(.top){
+  background-size: 100% 200px !important;
+  box-shadow: 0 -1px #ffffff4d inset, 0 1px #0000001a, 0 3px 4px #0000000d !important;
+}
+.outline-link{
+  transition: .35s !important;
+}
+.outline-link:hover, .outline-link.active{
+  box-shadow: 1px 0 var(--primary-color) inset, 250px 0 var(--primary-opacity-1) inset;
+  text-shadow: 0 1px var(--white-bg);
+  margin-left: -16px;
+  padding-left: 16px;
+  
+}
+.outline-marker{
+  display: none;
+}
+
+
+header:has(.VPNavBar.top) + .VPLocalNav + .VPSidebar {
+  background: transparent !important;
+}
+.VPSidebar{
+  width: 280px !important;
+  margin-top: var(--desktop-nav-height);
+  border-right: 1px solid;
+  border-right-color: #00000021;
+  box-shadow: 1px 0 #fff, -1px 0 transparent inset !important;
+  background: var(--white-bg) !important;
+  background-position: left;
+  text-shadow: 0 1px #fff;
+  transition: .35s;
+  padding: 5px 2px !important;
+  padding-top: var(--vp-nav-height) !important;
+  overflow: hidden !important;
+  transition: .35s !important;
+}
+.aside-curtain{
+  display: none;
+}
+.VPContent.has-sidebar{
+  padding-left: var(--vp-sidebar-width) !important;
+  padding-right: 0 !important;
+}
+.VPSidebarItem{
+  padding: 4px 18px 4px 22px;
+  border-radius: 8px;
+  transition: .35s !important;
+}
+.VPSidebarItem.is-active{
+  background: color-mix(in srgb, var(--primary-color), transparent 85%);
+}
+.VPSidebarItem.is-active .text,.VPSidebarItem .text:hover{
+  color: var(--primary-color) !important;
+}
+.group{
+  width: 100% !important;
+}
+.VPDoc.has-aside .content-container{
+  max-width: none !important;
+}
+.VPNavBar.has-sidebar .title:not(a){
+  padding-left: 22px !important;
+  width: var(--vp-sidebar-width) !important;
+}
+#VPSidebarNav{
+  overflow: auto;
+  height: 100%;
+}
+.VPNavBar.has-sidebar .content{
+  padding-left: var(--vp-sidebar-width) !important;
+}
+.VPNavBarSearch{
+  padding-left: 15px !important;
+}
+.pager-link:hover{
+
+  border-color: var(--primary-color) !important;
+}
+
+.dark .VPNavBar[data-v-cf6e7c5e]:not(.home){
+
+  box-shadow: 0 1px #49494c !important;
+}
+.dark .VPSidebar{
+  text-shadow: none !important;
+  border-right-color: rgba(255, 255, 255, 0.24) !important;
+  box-shadow: 1px 0 transparent !important;
+}
+
+.dark .VPSidebarItem.is-active{
+  background: color-mix(in srgb, var(--primary-color), white 13%) !important;
+}
+.dark .VPSidebarItem.is-active .text{
+  color: white !important;
+}
+.dark .VPDoc{
+  border-color: rgba(255, 255, 255, 0.24) !important;
+}
+
+*,*::after,*::before{
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #a7b1be60 #0000;
 }

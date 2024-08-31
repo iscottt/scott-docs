@@ -6,7 +6,7 @@ const ogTitle = "SCOTTUI";
 const ogUrl = "https://vitejs.dev";
 const ogDescription = "Next Generation Frontend Tooling";
 export default defineConfigWithTheme({
-  title: "SCOTT Studio 教程&文档",
+  title: "ScottDoc",
   description: "SCOTT的文档站",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "https://blog.scott-studio.cn/uploads/2024/08/doc-logo.webp" }],
@@ -41,8 +41,9 @@ export default defineConfigWithTheme({
       { text: "首页", link: "/" },
       { text: "博客", link: "https://blog.scott-studio.cn" },
       {
-        text: "nvPress主题",
+        text: "主题",
         items: [
+          { text: "Somnia", link: "/themes/Somnia/guide",activeMatch: "/themes/Somnia" },
           { text: "Salary", link: "/themes/Salary/guide",activeMatch: "/themes/Salary" },
         ]
       },
