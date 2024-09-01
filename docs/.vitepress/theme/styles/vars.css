@@ -519,7 +519,7 @@ html, body {
 }
 
 
-.VPNavBar[data-v-cf6e7c5e]:not(.home){
+.VPNavBar:not(.home){
   background-image: linear-gradient(var(--white-bg), transparent) !important;
   background-size: 100% 85%;
   background-repeat: no-repeat;
@@ -647,7 +647,7 @@ header:has(.VPNavBar.top) + .VPLocalNav + .VPSidebar {
   border-color: var(--primary-color) !important;
 }
 
-.dark .VPNavBar[data-v-cf6e7c5e]:not(.home){
+.dark .VPNavBar:not(.home){
 
   box-shadow: 0 1px #49494c !important;
 }
