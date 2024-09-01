@@ -3,18 +3,18 @@
 layout: doc
 
 # title定义浏览器标签页上显示的标题
-title: Salary-友情链接
+title: Somnia-友情链接
 ---
 <div class="title-wrapper">
    <div class="page-title">友情链接</div>
-   <div class="post-title">—— Salary使用手册 · 新建页面
+   <div class="post-title">—— Somnia使用手册 · 新建页面
       <span class="lastModifyTime">
           <i class="fa-regular fa-clock"></i> 最后更新： 1 天前
       </span>
    </div>
 </div>
 
-`友情链接其实本质上也是一个页面，Salary主题中需要在页面的右侧，选择 “设置为友情链接页面”`
+`友情链接其实本质上也是一个页面，Somnia主题中需要在页面的右侧，选择 “设置为友情链接页面”`
 
 ## 添加页面
 

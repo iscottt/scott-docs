@@ -1,34 +1,34 @@
 const sidebar = {
-    '/themes/Salary': [
+    '/themes/Somnia': [
         {
-            text: 'Salary使用手册',
+            text: 'Somnia使用手册',
             items: [
                 {
                     text: '主题介绍',
-                    link: '/themes/Salary/guide'
+                    link: '/themes/Somnia/guide'
                 },
                 {
                     text: '主题安装',
-                    link: '/themes/Salary/install'
+                    link: '/themes/Somnia/install'
                 },
                 {
                     text: '开始使用',
-                    link: '/themes/Salary/start'
+                    link: '/themes/Somnia/start'
                 },
                 {
                     text: '菜单与链接',
-                    link: '/themes/Salary/menus'
+                    link: '/themes/Somnia/menus'
                 },
                 {
                     text: '使用打赏送礼品功能',
                     items: [
                         {
                             text: '启用打赏步骤',
-                            link: '/themes/Salary/reward/enable'
+                            link: '/themes/Somnia/reward/enable'
                         },
                         {
                             text: '开通支付接口',
-                            link: '/themes/Salary/reward/pay'
+                            link: '/themes/Somnia/reward/pay'
                         },
                     ]
                 },
@@ -37,24 +37,13 @@ const sidebar = {
                     items: [
                         {
                             text: '留言板',
-                            link: '/themes/Salary/newPage/guestbook'
+                            link: '/themes/Somnia/newPage/guestbook'
                         },
                         {
                             text: '友情链接',
-                            link: '/themes/Salary/newPage/favPage'
+                            link: '/themes/Somnia/newPage/favPage'
                         },
                     ]
-                },
-            ]
-        }
-    ],
-    '/themes/Somnia': [
-        {
-            text: 'Somnia使用手册',
-            items: [
-                {
-                    text: '主题介绍',
-                    link: '/themes/Somnia/guide'
                 },
             ]
         }

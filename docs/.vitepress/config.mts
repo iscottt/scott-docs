@@ -44,7 +44,6 @@ export default defineConfigWithTheme({
         text: "主题",
         items: [
           { text: "Somnia", link: "/themes/Somnia/guide",activeMatch: "/themes/Somnia" },
-          { text: "Salary", link: "/themes/Salary/guide",activeMatch: "/themes/Salary" },
         ]
       },
       {

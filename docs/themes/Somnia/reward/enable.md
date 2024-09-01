@@ -3,11 +3,11 @@
 layout: doc
 
 # title定义浏览器标签页上显示的标题
-title: Salary-启用打赏步骤
+title: Somnia-启用打赏步骤
 ---
 <div class="title-wrapper">
    <div class="page-title">启用打赏步骤</div>
-   <div class="post-title">—— Salary使用手册 · 使用打赏送礼品功能 
+   <div class="post-title">—— Somnia使用手册 · 使用打赏送礼品功能 
       <span class="lastModifyTime">
           <i class="fa-regular fa-clock"></i> 最后更新： 1 天前
       </span>
@@ -20,7 +20,7 @@ title: Salary-启用打赏步骤
 2. 个人博主没有营业执照，因此只能使用“免签约”接口
 基于以上原因，当前**仅有**支付宝官方提供的**当面付**接口可供使用。
 
-获取方法请参考：[开通支付接口](/themes/Salary/reward/pay)
+获取方法请参考：[开通支付接口](/themes/Somnia/reward/pay)
 
 ## 填写支付接口
 

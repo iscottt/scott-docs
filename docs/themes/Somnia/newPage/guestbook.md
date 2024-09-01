@@ -3,11 +3,11 @@
 layout: doc
 
 # title定义浏览器标签页上显示的标题
-title: Salary-留言板
+title: Somnia-留言板
 ---
 <div class="title-wrapper">
    <div class="page-title">留言板</div>
-   <div class="post-title">—— Salary使用手册 · 新建页面
+   <div class="post-title">—— Somnia使用手册 · 新建页面
       <span class="lastModifyTime">
           <i class="fa-regular fa-clock"></i>  1 天前
       </span>
