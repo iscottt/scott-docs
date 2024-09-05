@@ -9,7 +9,7 @@ hero:
   text: 去寻找、去突破、去改变、去创造。
   # tagline: 让每个人轻松的定义自己的博客
   image:
-    src: ./assets/imgs/channel-logo.png
+    src: https://oss.scott-studio.cn/website/channel-logo.png
     width: 200
     alt: Vite
   actions:
