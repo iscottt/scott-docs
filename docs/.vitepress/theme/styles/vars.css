@@ -711,3 +711,20 @@ header:has(.VPNavBar.top) + .VPLocalNav + .VPSidebar {
   scrollbar-width: thin;
   scrollbar-color: #a7b1be60 #0000;
 }
+
+
+@media screen and (max-width: 768px) {
+  .VPContent.has-sidebar{
+    padding-left: 0 !important;
+    padding-top: 0 !important;
+  }
+  .VPNavBar.has-sidebar .content{
+    padding-left: 0 !important;
+  }
+  .DocSearch-Button{
+    height: 48px !important;
+  }
+  header:has(.VPNavBar.top) + .VPLocalNav + .VPSidebar.open{
+    background: #fff !important;
+  }
+}
