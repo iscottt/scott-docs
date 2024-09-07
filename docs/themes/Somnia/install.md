@@ -9,7 +9,7 @@ title: Somnia-主题安装
    <div class="page-title">主题安装</div>
    <div class="post-title">—— Somnia使用手册
       <span class="lastModifyTime">
-        <i class="fa-regular fa-clock"></i> 最后更新： 1 天前
+        <i class="fa-regular fa-clock"></i> 最后更新： 2024-09-07 11:27:53
       </span>
    </div>
 </div>
@@ -17,10 +17,10 @@ title: Somnia-主题安装
 ## 安装
 
 1. 根据 [nvPress安装使用手册](https://docs.panda-studio.cn:8282/docs/post-19/page-100) 安装好博客程序
-2. 将主题解压到电脑上，得到主题文件夹（该文件夹内至少应该包含`theme.json`、`function.js`等文件）
-3. 使用FTP软件，连接上您nvPress所在的服务器，将上一步得到的文件夹上传到nvPress映射的nv-themes文件夹所在地址
-4. 在`网站后台/外观/主题`启用本主题
-5. 重启nvPress服务（如果重启之后站点显示502，重启docker可以解决）
+2. 在网站后台/设置/常规检查站点地址的填写情况
+3. 打开网站后台/套件中心/获取套件，在“搜索主题”位置输入Somnia找到主题
+4. 点击搜索结果安装主题
+5. 等待安装完成提示，重启nvPress服务（如果重启之后站点显示502，重启docker可以解决）
 
 ## 授权
 

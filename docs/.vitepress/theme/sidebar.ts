@@ -16,6 +16,14 @@ const sidebar = {
                     link: '/themes/Somnia/start'
                 },
                 {
+                    text: '使用边栏',
+                    link: '/themes/Somnia/sidebar'
+                },
+                {
+                    text: '导航栏',
+                    link: '/themes/Somnia/navbar'
+                },
+                {
                     text: '菜单与链接',
                     link: '/themes/Somnia/menus'
                 },

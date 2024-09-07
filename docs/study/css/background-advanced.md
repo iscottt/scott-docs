@@ -9,7 +9,7 @@ title: CSS学习笔记-background 属性进阶技巧
    <div class="page-title">background 属性进阶</div>
    <div class="post-title">—— CSS学习笔记
       <span class="lastModifyTime">
-          <i class="fa-regular fa-clock"></i> 最后更新： 1 天前
+          <i class="fa-regular fa-clock"></i> 最后更新： 2024-09-07 11:27:53
       </span>
    </div>
 </div>

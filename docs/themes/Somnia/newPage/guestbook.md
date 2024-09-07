@@ -9,7 +9,7 @@ title: Somnia-留言板
    <div class="page-title">留言板</div>
    <div class="post-title">—— Somnia使用手册 · 新建页面
       <span class="lastModifyTime">
-          <i class="fa-regular fa-clock"></i>  1 天前
+          <i class="fa-regular fa-clock"></i>  2024-09-07 11:27:53
       </span>
    </div>
 </div>
