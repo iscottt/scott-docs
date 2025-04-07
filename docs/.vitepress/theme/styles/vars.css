@@ -3,7 +3,12 @@
  * -------------------------------------------------------------------------- */
 
 :root {
-  --vp-sidebar-width: 280px;
+  --font-color: 0deg 0% 20%;
+  --bg: hsl(var(--font-color) / 5%);
+  --border: thin solid hsl(var(--font-color) / 5%);
+  --w-bg: 0deg 0% 100%;
+  --h-bg: hsl(0deg 0% 98%);
+  --vp-sidebar-width: 320px;
   --vt-c-green: #42b883;
   --vt-c-green-light: #42d392;
   --vt-c-green-lighter: #35eb9a;
@@ -169,8 +174,8 @@
   --vp-code-vue-bg: #282c34;
   --vp-code-vue-color: #333;
   --vp-button-brand-bg: var(--primary-color);
-  --full-bg:#f0f2f7;
-  --white-bg:#fff
+  --full-bg: #f0f2f7;
+  --white-bg: #fff
 }
 
 .dark {
@@ -180,12 +185,17 @@
   --vp-code-vue-bg: var(--vp-c-bg-alt);
   --vp-code-vue-color: #fff;
   --vp-c-bg-alt: #18181C;
-  --full-bg:#000;
-  --white-bg:#15151a
+  --full-bg: hsl(var(--w-bg));
+  --white-bg: #15151a;
+  --font-color: 214deg 5% 80%;
+  --w-bg: 214deg 5% 5%;
+  --h-bg: 214deg 5% 5%;
 }
-.header-anchor{
+
+.header-anchor {
   display: none;
 }
+
 /**
  * Component: Algolia
  * -------------------------------------------------------------------------- */
@@ -220,18 +230,19 @@
   opacity: 1;
 } */
 
-.vp-doc a{
-  color: rgb(239 78 80 / 80%);
+.vp-doc a {
+  color: rgb(80 120 254 / 80%);
   line-height: 1;
   text-decoration: none;
   font-size: 14px;
   padding: .5em .75em;
   border-radius: 2em;
-  background: rgb(251 147 106 / 10%) linear-gradient(rgb(239 78 80 / 70%) 0 0) no-repeat 100% 100% / 0 100% border-box;
+  background: rgb(80 120 254 / 10%) linear-gradient(rgb(80 120 254 / 70%) 0 0) no-repeat 100% 100% / 0 100% border-box;
   -webkit-box-decoration-break: clone;
   transition: .7s cubic-bezier(.6, .1, 0, 1), background-position 0s !important;
 }
-.vp-doc a::before{
+
+.vp-doc a::before {
   content: "∞";
   height: 24px;
   display: inline-flex;
@@ -239,22 +250,22 @@
   justify-content: center;
   aspect-ratio: 1;
   margin: 0 .5em 0 -.5em;
-  background:rgb(239 78 80 / 50%);
+  background: rgb(80 120 254 / 50%);
   border-radius: 50%;
   color: white;
   font-size: 16px;
   transition: inherit;
 }
 
-.vp-doc a:hover{
+.vp-doc a:hover {
   color: white;
   background-position-x: 0;
   background-size: 100% 100%;
 }
-.vp-doc a:hover::before{
 
+.vp-doc a:hover::before {
   background: white;
-  color: rgb(239 78 80 / 50%);
+  color: rgb(80 120 254 / 50%);
   rotate: 45deg;
   scale: .9;
 }
@@ -262,10 +273,6 @@
 /* Transition by color instead of opacity */
 .dark .vp-doc .custom-block a {
   transition: color 0.25s;
-}
-
-.logo {
-  height: 36px !important;
 }
 
 .vp-doc mark {
@@ -280,9 +287,8 @@
 }
 
 .vp-doc h2 {
-
   margin: 1em 0;
-  font-size: 1.5em;
+  font-size: 1.25em;
   font-weight: 400;
   position: relative;
   border-bottom: 1px solid var(--primary-opacity-2);
@@ -340,9 +346,10 @@
 
 
 .title-wrapper {
-  margin-left: -60px;
+  margin-left: -64px;
   padding-left: 57px;
-  margin-bottom: 50px
+  margin-bottom: 30px;
+  border-left: 3px solid var(--primary-color-suppl);
 }
 
 .title-wrapper .page-title {
@@ -518,6 +525,10 @@ p {
   box-shadow: 0 0 0 1px var(--primary-opacity-5), 0 0 0 4px var(--primary-opacity-1) !important;
 }
 
+.VPFooter {
+  background: radial-gradient(circle at 0 50%, hsl(109deg 42% 60% / 10%) 55%, hsl(109deg 42% 60% / 5%) 60%) !important;
+}
+
 .VPFooter .message,
 .VPFooter .copyright {
   text-align: right;
@@ -527,68 +538,89 @@ p {
 /* menu */
 .VPMenu {
   border-radius: 6px !important;
-  padding: 6px 8px !important
+  padding: 6px 8px !important;
+  background: hsl(var(--w-bg)) !important;
+  border: var(--border) !important;
+  backdrop-filter: blur(10px);
 }
 
 .menu {
   top: calc(var(--vp-nav-height) / 2 + 35px) !important;
+  transition: .35s !important;
 }
 
 /* .VPFeature .icon{
   background-color: transparent !important;
 } */
+.VPFeature {
+  background-color: var(--bg) !important;
+  border: var(--border) !important;
+}
 
-.VPFeature i{
+.VPFeature i {
   color: #fff;
 }
 
-.VPFeature a{
+.VPFeature a {
   transition: .35s;
 }
 
-.VPFeature :hover a{
+.VPFeature :hover a {
   color: var(--primary-color)
 }
-.pager-link .title{
+
+.pager-link .title {
   margin-top: 10px;
 }
-html, body { 
-	scroll-behavior:smooth; 
+
+html,
+body {
+  scroll-behavior: smooth;
   background: var(--full-bg);
 }
 
 
-.VPNavBar:not(.home){
-  background-image: linear-gradient(var(--white-bg), transparent) !important;
+.VPNavBar:not(.home) {
+  background-color: hsl(var(--w-bg)) !important;
   background-size: 100% 85%;
   background-repeat: no-repeat;
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   box-shadow: 0 -1px transparent inset, 0 1px #00000026, 0 2px var(--white-bg);
   transition: .35s;
 }
-.VPNavBarTitle.has-sidebar .title{
+
+.VPNavBar:not(.home).top{
+  background: transparent !important;
+}
+
+.VPNavBarTitle.has-sidebar .title {
   border: none;
 }
 
-.curtain{
+.curtain {
   background-color: transparent !important;
 }
-.DocSearch-Button{
+
+.DocSearch-Button {
   background: var(--vp-input-switch-bg-color);
 }
-.visually-hidden{
+
+.visually-hidden {
   display: none;
 }
-.VPNavBar.has-sidebar .divider{
+
+.VPNavBar.has-sidebar .divider {
   display: none;
 }
-.VPContent:not(.is-home){
+
+.VPContent:not(.is-home) {
   padding-left: var(--vp-sidebar-width);
   padding-top: var(--vp-nav-height);
 }
-.VPDoc{
-  background: var(--white-bg);
+
+.VPDoc {
+  background: hsl(var(--w-bg));
   margin: 15px;
   border-radius: 14px;
   width: calc(100% - 30px) !important;
@@ -596,117 +628,143 @@ html, body {
   border: 1px solid rgb(224, 224, 230);
   box-shadow: 0 15px 20px #1f2d3d1a;
 }
-.aside-container{
+
+.aside-container {
   position: sticky !important;
   padding-top: 0 !important;
   top: calc(var(--vp-nav-height) + 10px) !important;
 }
 
-.VPNavBar:not(.home.top) .content-body{
+.VPNavBar:not(.home.top) .content-body {
   background: transparent !important;
 }
 
-.VPNavBar:not(.top){
+.VPNavBar:not(.top) {
   background-size: 100% 200px !important;
   box-shadow: 0 -1px #ffffff4d inset, 0 1px #0000001a, 0 3px 4px #0000000d !important;
 }
-.outline-link{
+
+.outline-link {
   transition: .35s !important;
 }
-.outline-link:hover, .outline-link.active{
+
+.outline-link:hover,
+.outline-link.active {
   box-shadow: 1px 0 var(--primary-color) inset, 250px 0 var(--primary-opacity-1) inset;
   text-shadow: 0 1px var(--white-bg);
   margin-left: -16px;
   padding-left: 16px;
-  
+
 }
-.outline-marker{
+
+.outline-marker {
   display: none;
 }
 
-
-header:has(.VPNavBar.top) + .VPLocalNav + .VPSidebar {
-  background: transparent !important;
+.VPLocalNav.has-sidebar{
+  display: none;
 }
-.VPSidebar{
-  width: 280px !important;
+header:has(.VPNavBar.top)+.VPLocalNav+.VPSidebar {
+  background: transparent !important;
+  box-shadow: 1px 0 hsl(var(--w-bg)), -1px 0 transparent inset !important;
+}
+
+.VPSidebar {
+  /* width: 280px !important; */
   margin-top: var(--desktop-nav-height);
+  background: var(--white-bg) !important;
   border-right: 1px solid;
   border-right-color: #00000021;
-  box-shadow: 1px 0 #fff, -1px 0 transparent inset !important;
-  background: var(--white-bg) !important;
+  box-shadow: 1px 0 transparent, -1px 0 hsl(var(--w-bg)) inset;
   background-position: left;
   text-shadow: 0 1px #fff;
   transition: .35s;
-  padding: 5px 2px !important;
+  /* padding: 5px 2px !important; */
   padding-top: var(--vp-nav-height) !important;
   overflow: hidden !important;
   transition: .35s !important;
 }
-.aside-curtain{
+
+.aside-curtain {
   display: none;
 }
-.VPContent.has-sidebar{
-  padding-left: var(--vp-sidebar-width) !important;
-  padding-right: 0 !important;
+
+.VPContent.has-sidebar {
+  /* padding-left: var(--vp-sidebar-width) !important; */
+  /* padding-right: 0 !important; */
 }
-.VPSidebarItem{
+
+.VPSidebarItem {
   padding: 4px 18px 4px 22px;
   border-radius: 8px;
   transition: .35s !important;
 }
-.VPSidebarItem.is-active{
+
+.VPSidebarItem.is-active {
   background: color-mix(in srgb, var(--primary-color), transparent 85%);
 }
-.VPSidebarItem.is-active .text,.VPSidebarItem .text:hover{
+
+.VPSidebarItem.is-active .text,
+.VPSidebarItem .text:hover {
   color: var(--primary-color) !important;
 }
-.group{
+
+.group {
   width: 100% !important;
 }
-.VPDoc.has-aside .content-container{
+
+.VPDoc.has-aside .content-container {
   max-width: none !important;
 }
-.VPNavBar.has-sidebar .title:not(a){
-  padding-left: 22px !important;
-  width: var(--vp-sidebar-width) !important;
+
+.VPNavBar.has-sidebar .title:not(a) .VPNavBarTitle {
+  /* padding-left: 22px !important; */
+  /* width: var(--vp-sidebar-width) !important; */
 }
-#VPSidebarNav{
+
+#VPSidebarNav {
   overflow: auto;
   height: 100%;
 }
-.VPNavBar.has-sidebar .content{
-  padding-left: var(--vp-sidebar-width) !important;
+
+.VPNavBar.has-sidebar .content {
+  /* padding-left: var(--vp-sidebar-width) !important; */
 }
-.VPNavBarSearch{
+
+/* .VPNavBarSearch {
   padding-left: 15px !important;
-}
-.pager-link:hover{
+} */
+
+.pager-link:hover {
 
   border-color: var(--primary-color) !important;
 }
 
-.dark .VPNavBar:not(.home){
-
+.dark .VPNavBar:not(.home) {
   box-shadow: 0 1px #49494c !important;
 }
-.dark .VPSidebar{
+
+.dark .VPSidebar {
   text-shadow: none !important;
   border-right-color: rgba(255, 255, 255, 0.24) !important;
   box-shadow: 1px 0 transparent !important;
 }
 
-.dark .VPSidebarItem.is-active{
+.dark .VPSidebarItem.is-active {
   background: color-mix(in srgb, var(--primary-color), white 13%) !important;
 }
-.dark .VPSidebarItem.is-active .text{
+
+.dark .VPSidebarItem.is-active .text {
   color: white !important;
 }
-.dark .VPDoc{
+
+.dark .VPDoc {
   border-color: rgba(255, 255, 255, 0.24) !important;
 }
 
-*,*::after,*::before{
+*,
+*::after,
+*::before {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: #a7b1be60 #0000;
@@ -714,17 +772,24 @@ header:has(.VPNavBar.top) + .VPLocalNav + .VPSidebar {
 
 
 @media screen and (max-width: 768px) {
-  .VPContent.has-sidebar{
+  .VPContent.has-sidebar {
     padding-left: 0 !important;
     padding-top: 0 !important;
   }
-  .VPNavBar.has-sidebar .content{
+
+  .VPNavBar.has-sidebar .content {
     padding-left: 0 !important;
   }
-  .DocSearch-Button{
+
+  .DocSearch-Button {
     height: 48px !important;
   }
-  header:has(.VPNavBar.top) + .VPLocalNav + .VPSidebar.open{
+
+  header:has(.VPNavBar.top)+.VPLocalNav+.VPSidebar.open {
     background: #fff !important;
   }
+}
+
+.VPSidebarItem.level-1 .items, .VPSidebarItem.level-2 .items, .VPSidebarItem.level-3 .items, .VPSidebarItem.level-4 .items, .VPSidebarItem.level-5 .items{
+  padding-left: 8px !important;
 }

@@ -56,6 +56,46 @@ const sidebar = {
             ]
         }
     ],
+    '/themes/thyuu': [
+        {
+            text: 'THYUU/星度主题文档',
+            items: [
+                {
+                    text: '主题介绍',
+                    link: '/themes/thyuu/guide'
+                },
+                {
+                    text: '准备工作',
+                    link: '/themes/thyuu/prepare'
+                },
+                {
+                    text: '开始使用',
+                    link: '/themes/thyuu/start'
+                },
+                {
+                    text: '菜单与链接',
+                    link: '/themes/thyuu/menus'
+                },
+                {
+                    text: '页面',
+                    items: [
+                        {
+                            text: '新建页面',
+                            link: '/themes/thyuu/page/create'
+                        },
+                        {
+                            text: '页面展示',
+                            link: '/themes/thyuu/page/shows'
+                        },
+                    ]
+                },
+                {
+                    text: 'RSS订阅与友链',
+                    link: '/themes/thyuu/rss'
+                },
+            ]
+        }
+    ],
     '/study/css': [
         {
             text: '🗳️ CSS技术揭秘与实战通关',

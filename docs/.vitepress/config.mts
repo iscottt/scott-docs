@@ -1,15 +1,15 @@
 import { defineConfigWithTheme } from "vitepress";
 import mdItCustomAttrs from 'markdown-it-custom-attrs'
 import sidebar from "./theme/sidebar";
-const ogImage = "https://blog.scott-studio.cn/uploads/2024/08/doc-logo.webp";
-const ogTitle = "SCOTTUI";
-const ogUrl = "https://vitejs.dev";
-const ogDescription = "Next Generation Frontend Tooling";
+const ogImage = "https://scott-studio.cn/uploads/2025/04/adKkrAWumr_wS8VdwIRMZz2c.svg";
+const ogTitle = "木木笔记";
+const ogUrl = "https://docs.scott-studio.cn/";
+const ogDescription = "木木笔记 —— 灵感的栖息地";
 export default defineConfigWithTheme({
-  title: "ScottDoc",
-  description: "SCOTT的文档站",
+  title: "木木笔记",
+  description: "灵感的栖息地",
   head: [
-    ["link", { rel: "icon", type: "image/svg+xml", href: "https://blog.scott-studio.cn/uploads/2024/08/doc-logo.webp" }],
+    ["link", { rel: "icon", type: "image/svg+xml", href: "https://scott-studio.cn/uploads/2025/04/adKkrAWumr_wS8VdwIRMZz2c.svg" }],
     ["meta", { property: "og:type", content: "website" }],
     ["meta", { property: "og:title", content: ogTitle }],
     ["meta", { property: "og:image", content: ogImage }],
@@ -25,13 +25,13 @@ export default defineConfigWithTheme({
     ["script", { src: "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js" }],
   ],
   themeConfig: {
-    // logo: "./assets/imgs/channel-logo.png",
+    logo: "https://scott-studio.cn/uploads/2025/04/adKkrAWumr_wS8VdwIRMZz2c.svg",
     socialLinks: [
       { icon: "github", link: "https://github.com/iscottt/scott-docs" },
     ],
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'COPYRIGHT © 2022 - 至今 SCOTT-STUDIO.CN'
+      copyright: 'COPYRIGHT © 2022 - 至今 木木笔记'
     },
 
     search: {
@@ -39,18 +39,25 @@ export default defineConfigWithTheme({
     },
     nav: [
       { text: "首页", link: "/" },
-      { text: "博客", link: "https://blog.scott-studio.cn" },
       {
-        text: "主题",
+        text: "博客",
         items: [
-          { text: "Somnia", link: "/themes/Somnia/guide",activeMatch: "/themes/Somnia" },
+          { text: 'SCOTT Studio', link: "https://blog.scott-studio.cn" },
+          { text: '三禾木木', link: "https://scott-studio.cn" },
         ]
       },
       {
-        text:"掘金小册",
-        items:[
-          { text: "CSS技术揭秘与实战通关", link: "/study/css/background",activeMatch: "/study/css" },
-          { text: "Nuxt3.0全栈开发", link: "/study/nuxt/lesson1",activeMatch: "/study/nuxt" },
+        text: "主题",
+        items: [
+          { text: "Somnia", link: "/themes/Somnia/guide", activeMatch: "/themes/Somnia" },
+          { text: "THYUU/星度", link: "/themes/thyuu/guide", activeMatch: "/themes/thyuu" },
+        ]
+      },
+      {
+        text: "掘金小册",
+        items: [
+          { text: "CSS技术揭秘与实战通关", link: "/study/css/background", activeMatch: "/study/css" },
+          { text: "Nuxt3.0全栈开发", link: "/study/nuxt/lesson1", activeMatch: "/study/nuxt" },
         ]
       }
     ],

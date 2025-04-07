@@ -1,12 +1,12 @@
 ---
 layout: home
 
-title: SCOTT Studio Docs
-titleTemplate: SCOTT Studio的文档站
+title: 木木笔记
+titleTemplate: 三禾木木的文档站
 
 hero:
-  name: SCOTT DOC
-  text: 去寻找、去突破、去改变、去创造。
+  name: 木木笔记
+  text: 灵感的栖息地
   # tagline: 让每个人轻松的定义自己的博客
   image:
     src: https://oss.scott-studio.cn/website/channel-logo.png
@@ -15,7 +15,7 @@ hero:
   actions:
   - theme: brand
     text: 查看文档
-    link: /themes/Somnia/guide
+    link: /themes/thyuu/guide
   - theme: alt
     text: 添加QQ频道
     link: https://pd.qq.com/s/6hu0be1c1
