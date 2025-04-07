@@ -9,7 +9,7 @@ hero:
   text: 灵感的栖息地
   # tagline: 让每个人轻松的定义自己的博客
   image:
-    src: https://oss.scott-studio.cn/website/channel-logo.png
+    src: https://scott-studio.cn/uploads/2025/04/adKkrAWumr_wS8VdwIRMZz2c.svg
     width: 200
     alt: Vite
   actions:
