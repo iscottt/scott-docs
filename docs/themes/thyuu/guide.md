@@ -22,9 +22,11 @@ title: THYUU/星度主题-主题介绍
 
 ## 获取主题
 
-::: warning 主题暂未发布
-NvPress版本主题目前暂未发布，敬请期待。
-:::
+现在你可以前往 [鱼圈](https://yunext.cn/store/apps?ref=se2dy43x)购买`nvpress平台`。
+
+::: warning 重要提示
+你可以前往[领取优惠券](https://www.yunext.cn/uc/store/coupons/get-coupon)领取限时的满388-100优惠券
+::: 
 
 
 <mark>其他平台</mark>

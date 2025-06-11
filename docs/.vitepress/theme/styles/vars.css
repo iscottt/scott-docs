@@ -231,44 +231,36 @@
 } */
 
 .vp-doc a {
-  color: rgb(80 120 254 / 80%);
+  color: rgb(80 120 254 / 80%) !important;
   line-height: 1;
   text-decoration: none;
   font-size: 14px;
-  padding: .5em .75em;
+  padding: .25em .5em;
   border-radius: 2em;
+  text-shadow: none !important;
   background: rgb(80 120 254 / 10%) linear-gradient(rgb(80 120 254 / 70%) 0 0) no-repeat 100% 100% / 0 100% border-box;
   -webkit-box-decoration-break: clone;
   transition: .7s cubic-bezier(.6, .1, 0, 1), background-position 0s !important;
 }
 
 .vp-doc a::before {
-  content: "∞";
-  height: 24px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 1;
-  margin: 0 .5em 0 -.5em;
-  background: rgb(80 120 254 / 50%);
-  border-radius: 50%;
-  color: white;
-  font-size: 16px;
-  transition: inherit;
+  content: '\e60c';
+  display: inline-block;
+  transition: .35s;
+  font-family: iconfont;
+  margin-right: 2px;
 }
 
 .vp-doc a:hover {
-  color: white;
+  color: white !important;
   background-position-x: 0;
   background-size: 100% 100%;
 }
 
-.vp-doc a:hover::before {
-  background: white;
-  color: rgb(80 120 254 / 50%);
-  rotate: 45deg;
-  scale: .9;
+.vp-doc a:hover:before {
+  color: white !important;
 }
+
 
 /* Transition by color instead of opacity */
 .dark .vp-doc .custom-block a {

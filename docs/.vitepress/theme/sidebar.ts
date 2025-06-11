@@ -73,6 +73,10 @@ const sidebar = {
                     link: '/themes/thyuu/start'
                 },
                 {
+                    text: '首页',
+                    link: '/themes/thyuu/homePage'
+                },
+                {
                     text: '菜单与链接',
                     link: '/themes/thyuu/menus'
                 },

@@ -22,6 +22,10 @@ export default defineConfigWithTheme({
       "link",
       { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" },
     ],
+    [
+      "link",
+      {rel:"stylesheet", href:"https://at.alicdn.com/t/c/font_4938099_catc3bk7ir.css"}
+    ],
     ["script", { src: "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js" }],
   ],
   themeConfig: {

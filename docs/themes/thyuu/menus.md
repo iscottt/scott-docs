@@ -33,10 +33,10 @@ title: THYUU/星度主题文档-菜单与链接
 ## 使用图标
 
 
-1. 访问 [FontAwesome](https://kunkunyu.com/themes/thyuu-xingdu/assets/icons/demo_index.html)（若存在可访问性的问题，请尝试使用国际互联网）
-2. 选中 `Font Class` 选项卡
-3. 复制 `.icon-xxx` 然后将最前面的点去除
-5. 将它粘贴到菜单的“文本”位置。图标和文本用`·`分隔例如：`icon-crown·菜单文本`
+1. 访问 [THYUU/星度主题介绍站](https://theme.thyuu.com/)
+2. 选中 `图标库` 选项卡
+3. 选中图标之后点击图标会自动复制 `thyuu-icon-xxx` 
+5. 将它粘贴到菜单的“文本”位置。图标和文本用`·`分隔例如：`thyuu-icon-crown·菜单文本`
 6. 这样，就会在“菜单文本”的前面显示一个苹果图标了
 
 ## 一些固定的URL链接
